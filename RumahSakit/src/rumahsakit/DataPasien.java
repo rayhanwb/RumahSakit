@@ -55,13 +55,13 @@ ResultSet RsProduk=null;
    
 //menampilkan data ke form saat data pada tabel di klik 
     void tblKeForm(){
-        jTextFieldNIK.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),0)+"");
-        jTextFieldNama.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),1)+"");
-        jTextFieldAlamat.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),2)+"");
-        jTextFieldTelepon.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),3)+"");
-        jTextFieldTL.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),4)+"");
-        jTextFieldDarah.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),5)+"");
-        jComboBoxJK.setSelectedItem(tabModel.getValueAt(TabelPasien.getSelectedRow(),6)+"");
+        jTextFieldNIK.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),1)+"");
+        jTextFieldNama.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),2)+"");
+        jTextFieldAlamat.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),3)+"");
+        jTextFieldTelepon.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),4)+"");
+        jTextFieldTL.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),5)+"");
+        jTextFieldDarah.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),6)+"");
+        jComboBoxJK.setSelectedItem(tabModel.getValueAt(TabelPasien.getSelectedRow(),7)+"");
         
         buttonUpdate.setEnabled(true);
         buttonDelete.setEnabled(true);
@@ -80,15 +80,18 @@ ResultSet RsProduk=null;
         jComboBoxJK.setSelectedIndex(0);
         
     } 
-//    
-//   //disable form
-//    private void SetEditOff(){
-//        jTextKodeProduk.setEnabled(false);
-//        jTextNama.setEnabled(false);
-//        jComboBoxSatuan.setEnabled(false);
-//        jTextHarga.setEnabled(false);
-//        jTextStok.setEnabled(false);
-//    }
+    
+   //disable form
+    private void SetEditOff(){
+        jTextFieldNIK.setEnabled(false);
+        jTextFieldNama.setEnabled(false); 
+        jTextFieldAlamat.setEnabled(false);
+        jTextFieldTelepon.setEnabled(false);
+        jTextFieldTL.setEnabled(false);
+        jTextFieldDarah.setEnabled(false);
+        jComboBoxJK.setEnabled(false);
+    }
+    
     //enable form
     private void seteditOn(){
         jTextFieldNIK.setEnabled(true);
@@ -224,6 +227,11 @@ ResultSet RsProduk=null;
         });
 
         buttonDelete.setLabel("Delete");
+        buttonDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDeleteActionPerformed(evt);
+            }
+        });
 
         buttonSave.setLabel("Save");
         buttonSave.addActionListener(new java.awt.event.ActionListener() {
@@ -370,9 +378,70 @@ ResultSet RsProduk=null;
         seteditOn();
     }//GEN-LAST:event_buttonNewActionPerformed
 
+    private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        // TODO add your handling code here:
+        String nama=jTextFieldNama.getText();
+
+        if (nama.isEmpty() ) {
+            JOptionPane.showMessageDialog(null,"Kode produk tidak boleh kosong");
+            jTextFieldNama.requestFocus();
+        }else if(JOptionPane.showConfirmDialog(null,"Apakah anda yakin akan menghapus data ini?",
+            "Informasi",JOptionPane.OK_CANCEL_OPTION,JOptionPane.INFORMATION_MESSAGE)==JOptionPane.OK_OPTION){
+        try{
+            Connection conn=(Connection)koneksi.koneksiDB();
+            Statement stt=conn.createStatement();
+            stt.executeUpdate("DELETE FROM pasien WHERE nama='"+nama+"'");
+            BersihData();
+            tampilData();
+            SetEditOff();
+            JOptionPane.showMessageDialog(this,"Data berhasil di hapus","Success",JOptionPane.INFORMATION_MESSAGE);
+        } catch(SQLException e){
+            JOptionPane.showMessageDialog(this,"Delete data gagal\n"+e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+        }
+        }
+    }
+    
     private void buttonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUpdateActionPerformed
         // TODO add your handling code here:
+        String nama=jTextFieldNama.getText();
+        String jk=jComboBoxJK.getSelectedItem().toString();
+        String nik=jTextFieldNIK.getText();
+        String alamat=jTextFieldAlamat.getText();
+        String telepon=jTextFieldTelepon.getText();
+        String tl=jTextFieldTL.getText();
+        String darah=jTextFieldDarah.getText();        
         
+        if (nama.isEmpty() ) {
+            JOptionPane.showMessageDialog(null,"Nama tidak boleh dikosongkan!");
+            jTextFieldNama.requestFocus();
+        }else if (nik.isEmpty()) {
+            JOptionPane.showMessageDialog(null,"NIK tidak boleh dikosongkan!");
+            jTextFieldNIK.requestFocus();
+        }else if (alamat.isEmpty()) {
+            JOptionPane.showMessageDialog(null,"Alamat tidak boleh dikosongkan!");
+            jTextFieldAlamat.requestFocus();
+        }else if (telepon.isEmpty()) {
+            JOptionPane.showMessageDialog(null,"Telepon tidak boleh dikosongkan!");
+            jTextFieldTelepon.requestFocus();
+        }else if (tl.isEmpty()) {
+            JOptionPane.showMessageDialog(null,"Tanggal lahir tidak boleh dikosongkan!");
+            jTextFieldTL.requestFocus();
+        }else if (darah.isEmpty()) {
+            JOptionPane.showMessageDialog(null,"Darah tidak boleh dikosongkan!");
+            jTextFieldDarah.requestFocus();
+        }else{
+            try{
+                Connection conn=(Connection)koneksi.koneksiDB();
+                Statement stt=conn.createStatement();
+                stt.executeUpdate("UPDATE pasien SET nik='"+nik+"', nama='"+nama+"' , alamat='"+alamat+"', telepon='"+telepon+"', tglahir='"+tl+"', goldar='"+darah+"', gender='"+jk+"')");
+                BersihData();
+                tampilData();
+                SetEditOff();
+                JOptionPane.showMessageDialog(this,"Data berhasil disimpan","Success",JOptionPane.INFORMATION_MESSAGE);
+            } catch(SQLException e){
+                JOptionPane.showMessageDialog(this,"Simpan data gagal\n"+e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_buttonUpdateActionPerformed
 
     private void jComboBoxJKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxJKActionPerformed
@@ -395,7 +464,26 @@ ResultSet RsProduk=null;
         String telepon=jTextFieldTelepon.getText();
         String tl=jTextFieldTL.getText();
         String darah=jTextFieldDarah.getText();        
-
+        
+        if (nama.isEmpty() ) {
+            JOptionPane.showMessageDialog(null,"Nama tidak boleh dikosongkan!");
+            jTextFieldNama.requestFocus();
+        }else if (nik.isEmpty()) {
+            JOptionPane.showMessageDialog(null,"NIK tidak boleh dikosongkan!");
+            jTextFieldNIK.requestFocus();
+        }else if (alamat.isEmpty()) {
+            JOptionPane.showMessageDialog(null,"Alamat tidak boleh dikosongkan!");
+            jTextFieldAlamat.requestFocus();
+        }else if (telepon.isEmpty()) {
+            JOptionPane.showMessageDialog(null,"Telepon tidak boleh dikosongkan!");
+            jTextFieldTelepon.requestFocus();
+        }else if (tl.isEmpty()) {
+            JOptionPane.showMessageDialog(null,"Tanggal lahir tidak boleh dikosongkan!");
+            jTextFieldTL.requestFocus();
+        }else if (darah.isEmpty()) {
+            JOptionPane.showMessageDialog(null,"Darah tidak boleh dikosongkan!");
+            jTextFieldDarah.requestFocus();
+        }else{
             try{
                 Connection conn=(Connection)koneksi.koneksiDB();
                 Statement stt=conn.createStatement();
@@ -403,10 +491,12 @@ ResultSet RsProduk=null;
                     "VALUES('"+nik+"','"+nama+"','"+alamat+"','"+telepon+"','"+tl+"','"+darah+"','"+jk+"')");
                 BersihData();
                 tampilData();
+                SetEditOff();
                 JOptionPane.showMessageDialog(this,"Data berhasil disimpan","Success",JOptionPane.INFORMATION_MESSAGE);
             } catch(SQLException e){
                 JOptionPane.showMessageDialog(this,"Simpan data gagal\n"+e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             }
+        }
     }//GEN-LAST:event_buttonSaveActionPerformed
 
     /**
