@@ -21,3 +21,10 @@ Write every changes for the version in here
 
 Added
 - Initial Files
+
+
+**06 June 2021 - [Guntur] **
+
+Added
+- Created on new, update, delete and save button also with the function/procedure
+- Passing data table to form
