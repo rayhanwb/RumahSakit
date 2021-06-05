@@ -26,7 +26,7 @@ ResultSet RsProduk=null;
 
         private void tampilData(){
         try{
-            Object[] judul_kolom = {"id_pasien", "nik", "nama", "telepon", "tglahir", "goldar", "gender"};
+            Object[] judul_kolom = {"id_pasien", "nik", "nama", "alamat", "telepon", "tglahir", "goldar", "gender"};
             tabModel=new DefaultTableModel(null,judul_kolom);
             TabelPasien.setModel(tabModel);
             
@@ -40,6 +40,7 @@ ResultSet RsProduk=null;
                     RsProduk.getString("id_pasien"),
                     RsProduk.getString("nik"),
                     RsProduk.getString("nama"),
+                    RsProduk.getString("alamat"),
                     RsProduk.getString("telepon"),
                     RsProduk.getString("tglahir"),
                     RsProduk.getString("goldar"), 
@@ -50,9 +51,55 @@ ResultSet RsProduk=null;
         } catch (Exception ex) {
         System.err.println(ex.getMessage());
         }
-
+    }
+   
+//menampilkan data ke form saat data pada tabel di klik 
+    void tblKeForm(){
+        jTextFieldNIK.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),0)+"");
+        jTextFieldNama.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),1)+"");
+        jTextFieldAlamat.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),2)+"");
+        jTextFieldTelepon.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),3)+"");
+        jTextFieldTL.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),4)+"");
+        jTextFieldDarah.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),5)+"");
+        jComboBoxJK.setSelectedItem(tabModel.getValueAt(TabelPasien.getSelectedRow(),6)+"");
+        
+        buttonUpdate.setEnabled(true);
+        buttonDelete.setEnabled(true);
+        buttonSave.setEnabled(false);
     }
     
+   //membersihkan form
+    private void BersihData(){
+        
+        jTextFieldNIK.setText("");
+        jTextFieldNama.setText(""); 
+        jTextFieldAlamat.setText("");
+        jTextFieldTelepon.setText("");
+        jTextFieldTL.setText("");
+        jTextFieldDarah.setText("");
+        jComboBoxJK.setSelectedIndex(0);
+        
+    } 
+//    
+//   //disable form
+//    private void SetEditOff(){
+//        jTextKodeProduk.setEnabled(false);
+//        jTextNama.setEnabled(false);
+//        jComboBoxSatuan.setEnabled(false);
+//        jTextHarga.setEnabled(false);
+//        jTextStok.setEnabled(false);
+//    }
+    //enable form
+    private void seteditOn(){
+        jTextFieldNIK.setEnabled(true);
+        jTextFieldNama.setEnabled(true); 
+        jTextFieldAlamat.setEnabled(true);
+        jTextFieldTelepon.setEnabled(true);
+        jTextFieldTL.setEnabled(true);
+        jTextFieldDarah.setEnabled(true);
+        jComboBoxJK.setEnabled(true);
+    }
+ 
     
     
     /**
@@ -100,6 +147,12 @@ ResultSet RsProduk=null;
             }
         ));
         jScrollPane1.setViewportView(TabelPasien);
+
+        TabelPasien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TabelPasienMouseClicked(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         jLabel1.setText("Data Pasien");
@@ -179,7 +232,7 @@ ResultSet RsProduk=null;
             }
         });
 
-        jComboBoxJK.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxJK.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "L", "P" }));
         jComboBoxJK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxJKActionPerformed(evt);
@@ -310,18 +363,50 @@ ResultSet RsProduk=null;
 
     private void buttonNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNewActionPerformed
         // TODO add your handling code here:
+        BersihData();
+        buttonSave.setEnabled(true);
+        buttonUpdate.setEnabled(false);
+        buttonDelete.setEnabled(false);
+        seteditOn();
     }//GEN-LAST:event_buttonNewActionPerformed
 
     private void buttonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUpdateActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_buttonUpdateActionPerformed
 
     private void jComboBoxJKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxJKActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxJKActionPerformed
 
+     //menangani proses saat tabel produk di klik
+    private void TabelPasienMouseClicked(java.awt.event.MouseEvent evt) {                                         
+        // TODO add your handling code here:
+        seteditOn();
+        tblKeForm();
+    }       
+    
     private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
         // TODO add your handling code here:
+        String nama=jTextFieldNama.getText();
+        String jk=jComboBoxJK.getSelectedItem().toString();
+        String nik=jTextFieldNIK.getText();
+        String alamat=jTextFieldAlamat.getText();
+        String telepon=jTextFieldTelepon.getText();
+        String tl=jTextFieldTL.getText();
+        String darah=jTextFieldDarah.getText();        
+
+            try{
+                Connection conn=(Connection)koneksi.koneksiDB();
+                Statement stt=conn.createStatement();
+                stt.executeUpdate("INSERT INTO pasien(nik, nama, alamat, telepon, tglahir, goldar, gender)"+
+                    "VALUES('"+nik+"','"+nama+"','"+alamat+"','"+telepon+"','"+tl+"','"+darah+"','"+jk+"')");
+                BersihData();
+                tampilData();
+                JOptionPane.showMessageDialog(this,"Data berhasil disimpan","Success",JOptionPane.INFORMATION_MESSAGE);
+            } catch(SQLException e){
+                JOptionPane.showMessageDialog(this,"Simpan data gagal\n"+e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+            }
     }//GEN-LAST:event_buttonSaveActionPerformed
 
     /**
