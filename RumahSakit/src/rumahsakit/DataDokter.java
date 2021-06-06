@@ -28,7 +28,7 @@ ResultSet RsProduk=null;
         try{
             Object[] judul_kolom = {"id_dokter", "nik", "nama", "alamat", "telepon", "tglahir", "goldar", "gender", "spesialisasi"};
             tabModel=new DefaultTableModel(null,judul_kolom);
-            TabelPasien.setModel(tabModel);
+            TabelDokter.setModel(tabModel);
             
             Connection conn=(Connection)koneksi.koneksiDB();
             Statement stt=conn.createStatement();
@@ -56,14 +56,15 @@ ResultSet RsProduk=null;
    
 //menampilkan data ke form saat data pada tabel di klik 
     void tblKeForm(){
-        jTextFieldNIK.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),1)+"");
-        jTextFieldNama.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),2)+"");
-        jTextFieldAlamat.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),3)+"");
-        jTextFieldTelepon.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),4)+"");
-        jTextFieldTL.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),5)+"");
-        jTextFieldDarah.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),6)+"");
-        jComboBoxJK.setSelectedItem(tabModel.getValueAt(TabelPasien.getSelectedRow(),7)+"");
-        jTextFieldSpesialisasi.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),8)+"");
+        jTextFieldNama.setText(tabModel.getValueAt(TabelDokter.getSelectedRow(), 2)+ "");
+        jTextFieldAlamat.setText(tabModel.getValueAt(TabelDokter.getSelectedRow(), 3)+ "");
+        jTextFieldTelepon.setText(tabModel.getValueAt(TabelDokter.getSelectedRow(), 4)+ "");
+        jTextFieldNIK.setText(tabModel.getValueAt(TabelDokter.getSelectedRow(),1)+"");
+        jTextFieldTL.setText(tabModel.getValueAt(TabelDokter.getSelectedRow(),5)+"");
+        jTextFieldDarah.setText(tabModel.getValueAt(TabelDokter.getSelectedRow(),6)+"");
+        jComboBoxJK.setSelectedItem(tabModel.getValueAt(TabelDokter.getSelectedRow(),7)+"");
+        jTextFieldSpesialisasi.setText(tabModel.getValueAt(TabelDokter.getSelectedRow(), 8)+ "");
+        
         buttonUpdate.setEnabled(true);
         buttonDelete.setEnabled(true);
         buttonSave.setEnabled(false);
@@ -119,7 +120,7 @@ ResultSet RsProduk=null;
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        TabelPasien = new javax.swing.JTable();
+        TabelDokter = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jTextFieldNama = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -144,7 +145,7 @@ ResultSet RsProduk=null;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        TabelPasien.setModel(new javax.swing.table.DefaultTableModel(
+        TabelDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -155,7 +156,14 @@ ResultSet RsProduk=null;
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(TabelPasien);
+        
+         TabelDokter.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TabelDokterMouseClicked(evt);
+            }
+        });
+
+        jScrollPane1.setViewportView(TabelDokter);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         jLabel1.setText("Data Dokter");
@@ -227,6 +235,11 @@ ResultSet RsProduk=null;
         });
 
         buttonDelete.setLabel("Delete");
+        buttonDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDeleteActionPerformed(evt);
+            }
+        });
 
         buttonSave.setLabel("Save");
         buttonSave.addActionListener(new java.awt.event.ActionListener() {
@@ -396,14 +409,14 @@ ResultSet RsProduk=null;
         String nama=jTextFieldNama.getText();
 
         if (nama.isEmpty() ) {
-            JOptionPane.showMessageDialog(null,"Kode produk tidak boleh kosong");
+            JOptionPane.showMessageDialog(null,"Nama tidak boleh kosong");
             jTextFieldNama.requestFocus();
         }else if(JOptionPane.showConfirmDialog(null,"Apakah anda yakin akan menghapus data ini?",
             "Informasi",JOptionPane.OK_CANCEL_OPTION,JOptionPane.INFORMATION_MESSAGE)==JOptionPane.OK_OPTION){
         try{
             Connection conn=(Connection)koneksi.koneksiDB();
             Statement stt=conn.createStatement();
-            stt.executeUpdate("DELETE FROM pasien WHERE nama='"+nama+"'");
+            stt.executeUpdate("DELETE FROM dokter WHERE nama='"+nama+"'");
             BersihData();
             tampilData();
             SetEditOff();
@@ -450,7 +463,7 @@ ResultSet RsProduk=null;
             try{
                 Connection conn=(Connection)koneksi.koneksiDB();
                 Statement stt=conn.createStatement();
-                stt.executeUpdate("UPDATE dokter SET nik='"+nik+"', nama='"+nama+"' , alamat='"+alamat+"', telepon='"+telepon+"', tglahir='"+tl+"', goldar='"+darah+"', gender='"+jk+"', spesialisasi='"+spesialisasi+"')");
+                stt.executeUpdate("UPDATE dokter SET nik='"+nik+"', nama='"+nama+"' , alamat='"+alamat+"', telepon='"+telepon+"', tglahir='"+tl+"', goldar='"+darah+"', gender='"+jk+"', spesialisasi='"+spesialisasi+"' WHERE nama='"+nama+"'");
                 BersihData();
                 tampilData();
                 SetEditOff();
@@ -466,7 +479,7 @@ ResultSet RsProduk=null;
     }//GEN-LAST:event_jComboBoxJKActionPerformed
 
      //menangani proses saat tabel produk di klik
-    private void TabelPasienMouseClicked(java.awt.event.MouseEvent evt) {                                         
+    private void TabelDokterMouseClicked(java.awt.event.MouseEvent evt) {                                         
         // TODO add your handling code here:
         seteditOn();
         tblKeForm();
@@ -508,7 +521,7 @@ ResultSet RsProduk=null;
             try{
                 Connection conn=(Connection)koneksi.koneksiDB();
                 Statement stt=conn.createStatement();
-                stt.executeUpdate("INSERT INTO pasien(nik, nama, alamat, telepon, tglahir, goldar, gender, spesialisasi)"+
+                stt.executeUpdate("INSERT INTO dokter(nik, nama, alamat, telepon, tglahir, goldar, gender, spesialisasi)"+
                     "VALUES('"+nik+"','"+nama+"','"+alamat+"','"+telepon+"','"+tl+"','"+darah+"','"+jk+"','"+spesialisasi+"')");
                 BersihData();
                 tampilData();
@@ -563,7 +576,7 @@ ResultSet RsProduk=null;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable TabelPasien;
+    private javax.swing.JTable TabelDokter;
     private java.awt.Button buttonDelete;
     private java.awt.Button buttonNew;
     private java.awt.Button buttonSave;
