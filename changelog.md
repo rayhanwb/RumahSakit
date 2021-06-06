@@ -17,14 +17,19 @@ Write every changes for the version in here
 
 **[Write_new/latest_changes_here]**
 
-**06 June 2021 - [Rayhan] **
+**05 June 2021 - [Rayhan] **
 
 Added
 - Initial Files
 
 
-**06 June 2021 - [Guntur] **
+**05 June 2021 - [Guntur] **
 
 Added
 - Created on new, update, delete and save button also with the function/procedure
 - Passing data table to form
+
+**06 June 2021 - [Guntur] **
+
+Changed
+- DataPasien connected to db
