@@ -41,3 +41,8 @@ Changed
 
 Added
 - DataPasien & DataDokter comments 
+
+**06 June 2021 - [Rayhan] **
+
+Added
+- Invoice.java
