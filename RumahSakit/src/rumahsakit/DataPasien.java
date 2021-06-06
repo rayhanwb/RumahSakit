@@ -140,12 +140,13 @@ ResultSet RsProduk=null;
         buttonSave = new java.awt.Button();
         jComboBoxJK = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        button1 = new java.awt.Button();
+        buttonKembali = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1117, 630));
         setPreferredSize(new java.awt.Dimension(1117, 630));
-        getContentPane().setLayout(null);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         TabelPasien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -158,15 +159,19 @@ ResultSet RsProduk=null;
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        TabelPasien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TabelPasienMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(TabelPasien);
 
-        getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(340, 50, 739, 510);
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, 739, 510));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(1, 1, 1));
         jLabel1.setText("Data Pasien");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(120, 10, 194, 47);
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, -1, -1));
 
         jTextFieldNama.setToolTipText("");
         jTextFieldNama.addActionListener(new java.awt.event.ActionListener() {
@@ -174,76 +179,70 @@ ResultSet RsProduk=null;
                 jTextFieldNamaActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextFieldNama);
-        jTextFieldNama.setBounds(140, 72, 161, 24);
+        getContentPane().add(jTextFieldNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 72, 161, -1));
 
+        jLabel2.setForeground(new java.awt.Color(1, 1, 1));
         jLabel2.setText("Nama");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(43, 76, 70, 16);
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 76, 70, -1));
 
+        jLabel3.setForeground(new java.awt.Color(1, 1, 1));
         jLabel3.setText("Alamat");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(43, 118, 40, 16);
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 118, -1, -1));
 
         jTextFieldAlamat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldAlamatActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextFieldAlamat);
-        jTextFieldAlamat.setBounds(140, 114, 161, 24);
+        getContentPane().add(jTextFieldAlamat, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 114, 161, -1));
 
         jTextFieldTelepon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldTeleponActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextFieldTelepon);
-        jTextFieldTelepon.setBounds(140, 156, 161, 24);
+        getContentPane().add(jTextFieldTelepon, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 156, 161, -1));
 
+        jLabel4.setForeground(new java.awt.Color(1, 1, 1));
         jLabel4.setText("Telepon");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(43, 160, 45, 16);
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 160, -1, -1));
 
+        jLabel5.setForeground(new java.awt.Color(1, 1, 1));
         jLabel5.setText("Darah");
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(43, 202, 34, 16);
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 202, -1, -1));
 
         jTextFieldDarah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldDarahActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextFieldDarah);
-        jTextFieldDarah.setBounds(140, 198, 161, 24);
+        getContentPane().add(jTextFieldDarah, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 198, 161, -1));
 
+        jLabel6.setForeground(new java.awt.Color(1, 1, 1));
         jLabel6.setText("Tanggal Lahir");
-        getContentPane().add(jLabel6);
-        jLabel6.setBounds(43, 244, 77, 16);
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 244, -1, -1));
 
         jTextFieldTL.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldTLActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextFieldTL);
-        jTextFieldTL.setBounds(140, 240, 161, 24);
+        getContentPane().add(jTextFieldTL, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 161, -1));
 
+        jLabel7.setForeground(new java.awt.Color(1, 1, 1));
         jLabel7.setText("NIK");
-        getContentPane().add(jLabel7);
-        jLabel7.setBounds(43, 286, 80, 16);
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 286, 80, -1));
 
+        jLabel8.setForeground(new java.awt.Color(1, 1, 1));
         jLabel8.setText("Jenis Kelamin");
-        getContentPane().add(jLabel8);
-        jLabel8.setBounds(43, 329, 80, 16);
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 329, -1, -1));
 
         jTextFieldNIK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldNIKActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextFieldNIK);
-        jTextFieldNIK.setBounds(140, 282, 161, 24);
+        getContentPane().add(jTextFieldNIK, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 282, 161, -1));
 
         buttonNew.setLabel("New");
         buttonNew.setName(""); // NOI18N
@@ -252,8 +251,7 @@ ResultSet RsProduk=null;
                 buttonNewActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonNew);
-        buttonNew.setBounds(43, 379, 41, 24);
+        getContentPane().add(buttonNew, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 379, -1, -1));
 
         buttonUpdate.setLabel("Update");
         buttonUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -261,12 +259,10 @@ ResultSet RsProduk=null;
                 buttonUpdateActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonUpdate);
-        buttonUpdate.setBounds(94, 379, 56, 24);
+        getContentPane().add(buttonUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 379, -1, -1));
 
         buttonDelete.setLabel("Delete");
-        getContentPane().add(buttonDelete);
-        buttonDelete.setBounds(160, 379, 52, 24);
+        getContentPane().add(buttonDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 379, -1, -1));
 
         buttonSave.setLabel("Save");
         buttonSave.addActionListener(new java.awt.event.ActionListener() {
@@ -274,8 +270,7 @@ ResultSet RsProduk=null;
                 buttonSaveActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonSave);
-        buttonSave.setBounds(222, 379, 57, 24);
+        getContentPane().add(buttonSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 379, 57, -1));
 
         jComboBoxJK.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "L", "P" }));
         jComboBoxJK.addActionListener(new java.awt.event.ActionListener() {
@@ -283,18 +278,22 @@ ResultSet RsProduk=null;
                 jComboBoxJKActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboBoxJK);
-        jComboBoxJK.setBounds(141, 324, 160, 26);
+        getContentPane().add(jComboBoxJK, new org.netbeans.lib.awtextra.AbsoluteConstraints(141, 324, 160, -1));
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rumahsakit/Logo-PBO-kecil-bgt.png"))); // NOI18N
+        jLabel10.setIcon(new javax.swing.ImageIcon("/home/irfannm/NetBeansProjects/RumahSakit/RumahSakit/src/rumahsakit/Logo-PBO-kecil-bgt.png")); // NOI18N
         jLabel10.setText("iconjan");
-        getContentPane().add(jLabel10);
-        jLabel10.setBounds(50, 20, 30, 30);
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 30, -1));
 
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rumahsakit/Bg-PBO-coab.jpg"))); // NOI18N
-        jLabel9.setText("buatbg");
-        getContentPane().add(jLabel9);
-        jLabel9.setBounds(0, 0, 1100, 590);
+        button1.setLabel("Kembali");
+        button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 450, -1, -1));
+
+        buttonKembali.setIcon(new javax.swing.ImageIcon("/home/irfannm/NetBeansProjects/RumahSakit/RumahSakit/src/rumahsakit/Bg-PBO-coab.jpg")); // NOI18N
+        getContentPane().add(buttonKembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1110, 590));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -407,15 +406,7 @@ ResultSet RsProduk=null;
     private void jComboBoxJKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxJKActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxJKActionPerformed
-
-    //handling process when click data on pasien table
-    //menangani proses saat tabel pasien di klik
-    private void TabelPasienMouseClicked(java.awt.event.MouseEvent evt) {                                         
-        // TODO add your handling code here:
-        seteditOn();
-        tableToForm();
-    }       
- 
+    
     //process for saving data
     //proses untuk menyimpan data
     private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
@@ -462,6 +453,20 @@ ResultSet RsProduk=null;
         }
     }//GEN-LAST:event_buttonSaveActionPerformed
 
+    //handling process when click data on pasien table
+    //menangani proses saat tabel pasien di klik
+    private void TabelPasienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelPasienMouseClicked
+        // TODO add your handling code here:
+        seteditOn();
+        tableToForm();
+    }//GEN-LAST:event_TabelPasienMouseClicked
+
+    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        new menuUtama().setVisible(true);
+    }//GEN-LAST:event_button1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -499,7 +504,9 @@ ResultSet RsProduk=null;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TabelPasien;
+    private java.awt.Button button1;
     private java.awt.Button buttonDelete;
+    private javax.swing.JLabel buttonKembali;
     private java.awt.Button buttonNew;
     private java.awt.Button buttonSave;
     private java.awt.Button buttonUpdate;
@@ -513,7 +520,6 @@ ResultSet RsProduk=null;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextFieldAlamat;
     private javax.swing.JTextField jTextFieldDarah;
