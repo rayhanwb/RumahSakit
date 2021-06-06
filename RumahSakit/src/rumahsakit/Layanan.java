@@ -13,13 +13,13 @@ import java.awt.*;
  *
  * @author X230
  */
-public class Layanan extends javax.swing.JFrame {
+public class DataPasien extends javax.swing.JFrame {
 DefaultTableModel tabModel;
 ResultSet RsProduk=null;
     /**
      * Creates new form DataPasien
      */
-    public Layanan() {
+    public DataPasien() {
         initComponents();
         showData();
     }
@@ -56,12 +56,13 @@ ResultSet RsProduk=null;
     //show data to form when click data on table
     //menampilkan data ke form saat data pada tabel di klik
     void tableToForm(){
-        jTextFieldHarga.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),1)+"");
-        jTextFieldIdP.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),2)+"");
-        jTextFieldIdD.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),3)+"");
-        jTextFieldWaktu.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),5)+"");
-        jTextFieldKeterangan.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),6)+"");
-        jComboBoxJenis.setSelectedItem(tabModel.getValueAt(TabelPasien.getSelectedRow(),7)+"");
+        jTextFieldNIK.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),1)+"");
+        jTextFieldNama.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),2)+"");
+        jTextFieldAlamat.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),3)+"");
+        jTextFieldTelepon.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),4)+"");
+        jTextFieldTL.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),5)+"");
+        jTextFieldDarah.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),6)+"");
+        jComboBoxJK.setSelectedItem(tabModel.getValueAt(TabelPasien.getSelectedRow(),7)+"");
         
         buttonUpdate.setEnabled(true);
         buttonDelete.setEnabled(true);
@@ -72,35 +73,38 @@ ResultSet RsProduk=null;
     //membersihkan isian form 
     private void clearData(){
         
-        jTextFieldHarga.setText("");
-        jTextFieldIdP.setText(""); 
-        jTextFieldIdD.setText("");
-        jTextFieldWaktu.setText("");
-        jTextFieldKeterangan.setText("");
-        jComboBoxJenis.setSelectedIndex(0);
+        jTextFieldNIK.setText("");
+        jTextFieldNama.setText(""); 
+        jTextFieldAlamat.setText("");
+        jTextFieldTelepon.setText("");
+        jTextFieldTL.setText("");
+        jTextFieldDarah.setText("");
+        jComboBoxJK.setSelectedIndex(0);
         
     } 
     
     //disable to fill in form
     //tidak membolehkan untuk mengisi form
     private void SetEditOff(){
-        jTextFieldHarga.setEnabled(false);
-        jTextFieldIdP.setEnabled(false); 
-        jTextFieldIdD.setEnabled(false);
-        jTextFieldWaktu.setEnabled(false);
-        jTextFieldKeterangan.setEnabled(false);
-        jComboBoxJenis.setEnabled(false);
+        jTextFieldNIK.setEnabled(false);
+        jTextFieldNama.setEnabled(false); 
+        jTextFieldAlamat.setEnabled(false);
+        jTextFieldTelepon.setEnabled(false);
+        jTextFieldTL.setEnabled(false);
+        jTextFieldDarah.setEnabled(false);
+        jComboBoxJK.setEnabled(false);
     }
     
     //enable to fill in form
     //membolehkan untuk mengisi form
     private void seteditOn(){
-        jTextFieldHarga.setEnabled(true);
-        jTextFieldIdP.setEnabled(true); 
-        jTextFieldIdD.setEnabled(true);
-        jTextFieldWaktu.setEnabled(true);
-        jTextFieldKeterangan.setEnabled(true);
-        jComboBoxJenis.setEnabled(true);
+        jTextFieldNIK.setEnabled(true);
+        jTextFieldNama.setEnabled(true); 
+        jTextFieldAlamat.setEnabled(true);
+        jTextFieldTelepon.setEnabled(true);
+        jTextFieldTL.setEnabled(true);
+        jTextFieldDarah.setEnabled(true);
+        jComboBoxJK.setEnabled(true);
     }
  
     
@@ -117,24 +121,31 @@ ResultSet RsProduk=null;
         jScrollPane1 = new javax.swing.JScrollPane();
         TabelPasien = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jTextFieldIdP = new javax.swing.JTextField();
+        jTextFieldNama = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextFieldIdD = new javax.swing.JTextField();
+        jTextFieldAlamat = new javax.swing.JTextField();
+        jTextFieldTelepon = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextFieldKeterangan = new javax.swing.JTextField();
+        jTextFieldDarah = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextFieldWaktu = new javax.swing.JTextField();
+        jTextFieldTL = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextFieldHarga = new javax.swing.JTextField();
+        jTextFieldNIK = new javax.swing.JTextField();
         buttonNew = new java.awt.Button();
         buttonUpdate = new java.awt.Button();
         buttonDelete = new java.awt.Button();
         buttonSave = new java.awt.Button();
-        jComboBoxJenis = new javax.swing.JComboBox<>();
+        jComboBoxJK = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1117, 630));
+        setPreferredSize(new java.awt.Dimension(1117, 630));
+        getContentPane().setLayout(null);
 
         TabelPasien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -149,51 +160,90 @@ ResultSet RsProduk=null;
         ));
         jScrollPane1.setViewportView(TabelPasien);
 
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(340, 50, 739, 510);
+
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
-        jLabel1.setText("Layanan");
+        jLabel1.setText("Data Pasien");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(120, 10, 194, 47);
 
-        jTextFieldIdP.setToolTipText("");
-        jTextFieldIdP.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldNama.setToolTipText("");
+        jTextFieldNama.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldIdPActionPerformed(evt);
+                jTextFieldNamaActionPerformed(evt);
             }
         });
+        getContentPane().add(jTextFieldNama);
+        jTextFieldNama.setBounds(140, 72, 161, 24);
 
-        jLabel2.setText("ID Pasien");
+        jLabel2.setText("Nama");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(43, 76, 70, 16);
 
-        jLabel3.setText("ID Dokter");
+        jLabel3.setText("Alamat");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(43, 118, 40, 16);
 
-        jTextFieldIdD.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldAlamat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldIdDActionPerformed(evt);
+                jTextFieldAlamatActionPerformed(evt);
             }
         });
+        getContentPane().add(jTextFieldAlamat);
+        jTextFieldAlamat.setBounds(140, 114, 161, 24);
 
-        jLabel5.setText("Keterangan");
-
-        jTextFieldKeterangan.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldTelepon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldKeteranganActionPerformed(evt);
+                jTextFieldTeleponActionPerformed(evt);
             }
         });
+        getContentPane().add(jTextFieldTelepon);
+        jTextFieldTelepon.setBounds(140, 156, 161, 24);
 
-        jLabel6.setText("Waktu");
+        jLabel4.setText("Telepon");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(43, 160, 45, 16);
 
-        jTextFieldWaktu.addActionListener(new java.awt.event.ActionListener() {
+        jLabel5.setText("Darah");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(43, 202, 34, 16);
+
+        jTextFieldDarah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldWaktuActionPerformed(evt);
+                jTextFieldDarahActionPerformed(evt);
             }
         });
+        getContentPane().add(jTextFieldDarah);
+        jTextFieldDarah.setBounds(140, 198, 161, 24);
 
-        jLabel7.setText("Harga");
+        jLabel6.setText("Tanggal Lahir");
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(43, 244, 77, 16);
 
-        jLabel8.setText("Jenis ");
-
-        jTextFieldHarga.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldTL.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldHargaActionPerformed(evt);
+                jTextFieldTLActionPerformed(evt);
             }
         });
+        getContentPane().add(jTextFieldTL);
+        jTextFieldTL.setBounds(140, 240, 161, 24);
+
+        jLabel7.setText("NIK");
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(43, 286, 80, 16);
+
+        jLabel8.setText("Jenis Kelamin");
+        getContentPane().add(jLabel8);
+        jLabel8.setBounds(43, 329, 80, 16);
+
+        jTextFieldNIK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldNIKActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jTextFieldNIK);
+        jTextFieldNIK.setBounds(140, 282, 161, 24);
 
         buttonNew.setLabel("New");
         buttonNew.setName(""); // NOI18N
@@ -202,6 +252,8 @@ ResultSet RsProduk=null;
                 buttonNewActionPerformed(evt);
             }
         });
+        getContentPane().add(buttonNew);
+        buttonNew.setBounds(43, 379, 41, 24);
 
         buttonUpdate.setLabel("Update");
         buttonUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -209,8 +261,12 @@ ResultSet RsProduk=null;
                 buttonUpdateActionPerformed(evt);
             }
         });
+        getContentPane().add(buttonUpdate);
+        buttonUpdate.setBounds(94, 379, 56, 24);
 
         buttonDelete.setLabel("Delete");
+        getContentPane().add(buttonDelete);
+        buttonDelete.setBounds(160, 379, 52, 24);
 
         buttonSave.setLabel("Save");
         buttonSave.addActionListener(new java.awt.event.ActionListener() {
@@ -218,121 +274,54 @@ ResultSet RsProduk=null;
                 buttonSaveActionPerformed(evt);
             }
         });
+        getContentPane().add(buttonSave);
+        buttonSave.setBounds(222, 379, 57, 24);
 
-        jComboBoxJenis.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kontrol", "Che" }));
-        jComboBoxJenis.addActionListener(new java.awt.event.ActionListener() {
+        jComboBoxJK.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "L", "P" }));
+        jComboBoxJK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxJenisActionPerformed(evt);
+                jComboBoxJKActionPerformed(evt);
             }
         });
+        getContentPane().add(jComboBoxJK);
+        jComboBoxJK.setBounds(141, 324, 160, 26);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(122, 122, 122)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(buttonNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(buttonUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(buttonSave, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addGap(55, 55, 55))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel6)
-                                            .addComponent(jLabel7))
-                                        .addGap(20, 20, 20))
-                                    .addComponent(jLabel8))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jComboBoxJenis, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTextFieldHarga, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                                    .addComponent(jTextFieldWaktu, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                                    .addComponent(jTextFieldKeterangan, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                                    .addComponent(jTextFieldIdD, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                                    .addComponent(jTextFieldIdP, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE))))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 739, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextFieldIdP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextFieldIdD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(jComboBoxJenis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextFieldKeterangan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextFieldWaktu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(jTextFieldHarga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(67, 67, 67)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(buttonNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(buttonUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(buttonSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap())
-        );
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rumahsakit/Logo-PBO-kecil-bgt.png"))); // NOI18N
+        jLabel10.setText("iconjan");
+        getContentPane().add(jLabel10);
+        jLabel10.setBounds(50, 20, 30, 30);
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rumahsakit/Bg-PBO-coab.jpg"))); // NOI18N
+        jLabel9.setText("buatbg");
+        getContentPane().add(jLabel9);
+        jLabel9.setBounds(0, 0, 1100, 590);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldIdPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldIdPActionPerformed
+    private void jTextFieldNamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNamaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldIdPActionPerformed
+    }//GEN-LAST:event_jTextFieldNamaActionPerformed
 
-    private void jTextFieldIdDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldIdDActionPerformed
+    private void jTextFieldAlamatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldAlamatActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldIdDActionPerformed
+    }//GEN-LAST:event_jTextFieldAlamatActionPerformed
 
-    private void jTextFieldKeteranganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldKeteranganActionPerformed
+    private void jTextFieldTeleponActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTeleponActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldKeteranganActionPerformed
+    }//GEN-LAST:event_jTextFieldTeleponActionPerformed
 
-    private void jTextFieldWaktuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldWaktuActionPerformed
+    private void jTextFieldDarahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDarahActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldWaktuActionPerformed
+    }//GEN-LAST:event_jTextFieldDarahActionPerformed
 
-    private void jTextFieldHargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldHargaActionPerformed
+    private void jTextFieldTLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTLActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldHargaActionPerformed
+    }//GEN-LAST:event_jTextFieldTLActionPerformed
+
+    private void jTextFieldNIKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNIKActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldNIKActionPerformed
 
     //process for making new data
     //proses untuk membuat data data
@@ -349,11 +338,11 @@ ResultSet RsProduk=null;
     //proses untuk menghapus data
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {                                             
         // TODO add your handling code here:
-        String nama=jTextFieldIdP.getText();
+        String nama=jTextFieldNama.getText();
 
         if (nama.isEmpty() ) {
             JOptionPane.showMessageDialog(null,"Kode produk tidak boleh kosong");
-            jTextFieldIdP.requestFocus();
+            jTextFieldNama.requestFocus();
         }else if(JOptionPane.showConfirmDialog(null,"Apakah anda yakin akan menghapus data ini?",
             "Informasi",JOptionPane.OK_CANCEL_OPTION,JOptionPane.INFORMATION_MESSAGE)==JOptionPane.OK_OPTION){
         try{
@@ -374,34 +363,37 @@ ResultSet RsProduk=null;
     //proses untuk memperbaharui data
     private void buttonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUpdateActionPerformed
         // TODO add your handling code here:
-        String nama=jTextFieldIdP.getText();
-        String jk=jComboBoxJenis.getSelectedItem().toString();
-        String nik=jTextFieldHarga.getText();
-        String alamat=jTextFieldIdD.getText();
-      
-        String tl=jTextFieldWaktu.getText();
-        String darah=jTextFieldKeterangan.getText();        
+        String nama=jTextFieldNama.getText();
+        String jk=jComboBoxJK.getSelectedItem().toString();
+        String nik=jTextFieldNIK.getText();
+        String alamat=jTextFieldAlamat.getText();
+        String telepon=jTextFieldTelepon.getText();
+        String tl=jTextFieldTL.getText();
+        String darah=jTextFieldDarah.getText();        
         
         if (nama.isEmpty() ) {
             JOptionPane.showMessageDialog(null,"Nama tidak boleh dikosongkan!");
-            jTextFieldIdP.requestFocus();
+            jTextFieldNama.requestFocus();
         }else if (nik.isEmpty()) {
             JOptionPane.showMessageDialog(null,"NIK tidak boleh dikosongkan!");
-            jTextFieldHarga.requestFocus();
+            jTextFieldNIK.requestFocus();
         }else if (alamat.isEmpty()) {
             JOptionPane.showMessageDialog(null,"Alamat tidak boleh dikosongkan!");
-            jTextFieldIdD.requestFocus();
+            jTextFieldAlamat.requestFocus();
+        }else if (telepon.isEmpty()) {
+            JOptionPane.showMessageDialog(null,"Telepon tidak boleh dikosongkan!");
+            jTextFieldTelepon.requestFocus();
         }else if (tl.isEmpty()) {
             JOptionPane.showMessageDialog(null,"Tanggal lahir tidak boleh dikosongkan!");
-            jTextFieldWaktu.requestFocus();
+            jTextFieldTL.requestFocus();
         }else if (darah.isEmpty()) {
             JOptionPane.showMessageDialog(null,"Darah tidak boleh dikosongkan!");
-            jTextFieldKeterangan.requestFocus();
+            jTextFieldDarah.requestFocus();
         }else{
             try{
                 Connection conn=(Connection)koneksi.koneksiDB();
                 Statement stt=conn.createStatement();
-                stt.executeUpdate("UPDATE pasien SET nik='"+nik+"', nama='"+nama+"' , alamat='"+alamat+"', tglahir='"+tl+"', goldar='"+darah+"', gender='"+jk+"' WHERE nama='"+nama+"'");
+                stt.executeUpdate("UPDATE pasien SET nik='"+nik+"', nama='"+nama+"' , alamat='"+alamat+"', telepon='"+telepon+"', tglahir='"+tl+"', goldar='"+darah+"', gender='"+jk+"' WHERE nama='"+nama+"'");
                 clearData();
                 showData();
                 SetEditOff();
@@ -412,9 +404,9 @@ ResultSet RsProduk=null;
         }
     }//GEN-LAST:event_buttonUpdateActionPerformed
 
-    private void jComboBoxJenisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxJenisActionPerformed
+    private void jComboBoxJKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxJKActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxJenisActionPerformed
+    }//GEN-LAST:event_jComboBoxJKActionPerformed
 
     //handling process when click data on pasien table
     //menangani proses saat tabel pasien di klik
@@ -428,34 +420,38 @@ ResultSet RsProduk=null;
     //proses untuk menyimpan data
     private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
         // TODO add your handling code here:
-        String nama=jTextFieldIdP.getText();
-        String jk=jComboBoxJenis.getSelectedItem().toString();
-        String nik=jTextFieldHarga.getText();
-        String alamat=jTextFieldIdD.getText();
-        String tl=jTextFieldWaktu.getText();
-        String darah=jTextFieldKeterangan.getText();        
+        String nama=jTextFieldNama.getText();
+        String jk=jComboBoxJK.getSelectedItem().toString();
+        String nik=jTextFieldNIK.getText();
+        String alamat=jTextFieldAlamat.getText();
+        String telepon=jTextFieldTelepon.getText();
+        String tl=jTextFieldTL.getText();
+        String darah=jTextFieldDarah.getText();        
         
         if (nama.isEmpty() ) {
             JOptionPane.showMessageDialog(null,"Nama tidak boleh dikosongkan!");
-            jTextFieldIdP.requestFocus();
+            jTextFieldNama.requestFocus();
         }else if (nik.isEmpty()) {
             JOptionPane.showMessageDialog(null,"NIK tidak boleh dikosongkan!");
-            jTextFieldHarga.requestFocus();
+            jTextFieldNIK.requestFocus();
         }else if (alamat.isEmpty()) {
             JOptionPane.showMessageDialog(null,"Alamat tidak boleh dikosongkan!");
-            jTextFieldIdD.requestFocus();
+            jTextFieldAlamat.requestFocus();
+        }else if (telepon.isEmpty()) {
+            JOptionPane.showMessageDialog(null,"Telepon tidak boleh dikosongkan!");
+            jTextFieldTelepon.requestFocus();
         }else if (tl.isEmpty()) {
             JOptionPane.showMessageDialog(null,"Tanggal lahir tidak boleh dikosongkan!");
-            jTextFieldWaktu.requestFocus();
+            jTextFieldTL.requestFocus();
         }else if (darah.isEmpty()) {
             JOptionPane.showMessageDialog(null,"Darah tidak boleh dikosongkan!");
-            jTextFieldKeterangan.requestFocus();
+            jTextFieldDarah.requestFocus();
         }else{
             try{
                 Connection conn=(Connection)koneksi.koneksiDB();
                 Statement stt=conn.createStatement();
                 stt.executeUpdate("INSERT INTO pasien(nik, nama, alamat, telepon, tglahir, goldar, gender)"+
-                    "VALUES('"+nik+"','"+nama+"','"+alamat+"','"+tl+"','"+darah+"','"+jk+"')");
+                    "VALUES('"+nik+"','"+nama+"','"+alamat+"','"+telepon+"','"+tl+"','"+darah+"','"+jk+"')");
                 clearData();
                 showData();
                 SetEditOff();
@@ -507,19 +503,23 @@ ResultSet RsProduk=null;
     private java.awt.Button buttonNew;
     private java.awt.Button buttonSave;
     private java.awt.Button buttonUpdate;
-    private javax.swing.JComboBox<String> jComboBoxJenis;
+    private javax.swing.JComboBox<String> jComboBoxJK;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextFieldHarga;
-    private javax.swing.JTextField jTextFieldIdD;
-    private javax.swing.JTextField jTextFieldIdP;
-    private javax.swing.JTextField jTextFieldKeterangan;
-    private javax.swing.JTextField jTextFieldWaktu;
+    private javax.swing.JTextField jTextFieldAlamat;
+    private javax.swing.JTextField jTextFieldDarah;
+    private javax.swing.JTextField jTextFieldNIK;
+    private javax.swing.JTextField jTextFieldNama;
+    private javax.swing.JTextField jTextFieldTL;
+    private javax.swing.JTextField jTextFieldTelepon;
     // End of variables declaration//GEN-END:variables
 }
