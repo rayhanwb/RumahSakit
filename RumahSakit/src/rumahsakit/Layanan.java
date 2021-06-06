@@ -59,7 +59,6 @@ ResultSet RsProduk=null;
         jTextFieldHarga.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),1)+"");
         jTextFieldIdP.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),2)+"");
         jTextFieldIdD.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),3)+"");
-        jTextFieldTelepon.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),4)+"");
         jTextFieldWaktu.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),5)+"");
         jTextFieldKeterangan.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),6)+"");
         jComboBoxJenis.setSelectedItem(tabModel.getValueAt(TabelPasien.getSelectedRow(),7)+"");
@@ -76,7 +75,6 @@ ResultSet RsProduk=null;
         jTextFieldHarga.setText("");
         jTextFieldIdP.setText(""); 
         jTextFieldIdD.setText("");
-        jTextFieldTelepon.setText("");
         jTextFieldWaktu.setText("");
         jTextFieldKeterangan.setText("");
         jComboBoxJenis.setSelectedIndex(0);
@@ -89,7 +87,6 @@ ResultSet RsProduk=null;
         jTextFieldHarga.setEnabled(false);
         jTextFieldIdP.setEnabled(false); 
         jTextFieldIdD.setEnabled(false);
-        jTextFieldTelepon.setEnabled(false);
         jTextFieldWaktu.setEnabled(false);
         jTextFieldKeterangan.setEnabled(false);
         jComboBoxJenis.setEnabled(false);
@@ -101,7 +98,6 @@ ResultSet RsProduk=null;
         jTextFieldHarga.setEnabled(true);
         jTextFieldIdP.setEnabled(true); 
         jTextFieldIdD.setEnabled(true);
-        jTextFieldTelepon.setEnabled(true);
         jTextFieldWaktu.setEnabled(true);
         jTextFieldKeterangan.setEnabled(true);
         jComboBoxJenis.setEnabled(true);
@@ -382,7 +378,7 @@ ResultSet RsProduk=null;
         String jk=jComboBoxJenis.getSelectedItem().toString();
         String nik=jTextFieldHarga.getText();
         String alamat=jTextFieldIdD.getText();
-        String telepon=jTextFieldTelepon.getText();
+      
         String tl=jTextFieldWaktu.getText();
         String darah=jTextFieldKeterangan.getText();        
         
@@ -395,9 +391,6 @@ ResultSet RsProduk=null;
         }else if (alamat.isEmpty()) {
             JOptionPane.showMessageDialog(null,"Alamat tidak boleh dikosongkan!");
             jTextFieldIdD.requestFocus();
-        }else if (telepon.isEmpty()) {
-            JOptionPane.showMessageDialog(null,"Telepon tidak boleh dikosongkan!");
-            jTextFieldTelepon.requestFocus();
         }else if (tl.isEmpty()) {
             JOptionPane.showMessageDialog(null,"Tanggal lahir tidak boleh dikosongkan!");
             jTextFieldWaktu.requestFocus();
@@ -408,7 +401,7 @@ ResultSet RsProduk=null;
             try{
                 Connection conn=(Connection)koneksi.koneksiDB();
                 Statement stt=conn.createStatement();
-                stt.executeUpdate("UPDATE pasien SET nik='"+nik+"', nama='"+nama+"' , alamat='"+alamat+"', telepon='"+telepon+"', tglahir='"+tl+"', goldar='"+darah+"', gender='"+jk+"' WHERE nama='"+nama+"'");
+                stt.executeUpdate("UPDATE pasien SET nik='"+nik+"', nama='"+nama+"' , alamat='"+alamat+"', tglahir='"+tl+"', goldar='"+darah+"', gender='"+jk+"' WHERE nama='"+nama+"'");
                 clearData();
                 showData();
                 SetEditOff();
@@ -439,7 +432,6 @@ ResultSet RsProduk=null;
         String jk=jComboBoxJenis.getSelectedItem().toString();
         String nik=jTextFieldHarga.getText();
         String alamat=jTextFieldIdD.getText();
-        String telepon=jTextFieldTelepon.getText();
         String tl=jTextFieldWaktu.getText();
         String darah=jTextFieldKeterangan.getText();        
         
@@ -452,9 +444,6 @@ ResultSet RsProduk=null;
         }else if (alamat.isEmpty()) {
             JOptionPane.showMessageDialog(null,"Alamat tidak boleh dikosongkan!");
             jTextFieldIdD.requestFocus();
-        }else if (telepon.isEmpty()) {
-            JOptionPane.showMessageDialog(null,"Telepon tidak boleh dikosongkan!");
-            jTextFieldTelepon.requestFocus();
         }else if (tl.isEmpty()) {
             JOptionPane.showMessageDialog(null,"Tanggal lahir tidak boleh dikosongkan!");
             jTextFieldWaktu.requestFocus();
@@ -466,7 +455,7 @@ ResultSet RsProduk=null;
                 Connection conn=(Connection)koneksi.koneksiDB();
                 Statement stt=conn.createStatement();
                 stt.executeUpdate("INSERT INTO pasien(nik, nama, alamat, telepon, tglahir, goldar, gender)"+
-                    "VALUES('"+nik+"','"+nama+"','"+alamat+"','"+telepon+"','"+tl+"','"+darah+"','"+jk+"')");
+                    "VALUES('"+nik+"','"+nama+"','"+alamat+"','"+tl+"','"+darah+"','"+jk+"')");
                 clearData();
                 showData();
                 SetEditOff();
