@@ -21,10 +21,10 @@ ResultSet RsProduk=null;
      */
     public DataPasien() {
         initComponents();
-        tampilData();
+        showData();
     }
 
-        private void tampilData(){
+        private void showData(){
         try{
             Object[] judul_kolom = {"id_pasien", "nik", "nama", "alamat", "telepon", "tglahir", "goldar", "gender"};
             tabModel=new DefaultTableModel(null,judul_kolom);
@@ -53,8 +53,9 @@ ResultSet RsProduk=null;
         }
     }
    
-//menampilkan data ke form saat data pada tabel di klik 
-    void tblKeForm(){
+    //show data to form when click data on table
+    //menampilkan data ke form saat data pada tabel di klik
+    void tableToForm(){
         jTextFieldNIK.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),1)+"");
         jTextFieldNama.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),2)+"");
         jTextFieldAlamat.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),3)+"");
@@ -68,8 +69,9 @@ ResultSet RsProduk=null;
         buttonSave.setEnabled(false);
     }
     
-   //membersihkan form
-    private void BersihData(){
+    //clear the form
+    //membersihkan isian form 
+    private void clearData(){
         
         jTextFieldNIK.setText("");
         jTextFieldNama.setText(""); 
@@ -81,7 +83,8 @@ ResultSet RsProduk=null;
         
     } 
     
-   //disable form
+    //disable to fill in form
+    //tidak membolehkan untuk mengisi form
     private void SetEditOff(){
         jTextFieldNIK.setEnabled(false);
         jTextFieldNama.setEnabled(false); 
@@ -92,7 +95,8 @@ ResultSet RsProduk=null;
         jComboBoxJK.setEnabled(false);
     }
     
-    //enable form
+    //enable to fill in form
+    //membolehkan untuk mengisi form
     private void seteditOn(){
         jTextFieldNIK.setEnabled(true);
         jTextFieldNama.setEnabled(true); 
@@ -370,15 +374,19 @@ ResultSet RsProduk=null;
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldNIKActionPerformed
 
+    //process for making new data
+    //proses untuk membuat data data
     private void buttonNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNewActionPerformed
         // TODO add your handling code here:
-        BersihData();
+        clearData();
         buttonSave.setEnabled(true);
         buttonUpdate.setEnabled(false);
         buttonDelete.setEnabled(false);
         seteditOn();
     }//GEN-LAST:event_buttonNewActionPerformed
 
+    //process for deleting data
+    //proses untuk menghapus data
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {                                             
         // TODO add your handling code here:
         String nama=jTextFieldNama.getText();
@@ -392,8 +400,8 @@ ResultSet RsProduk=null;
             Connection conn=(Connection)koneksi.koneksiDB();
             Statement stt=conn.createStatement();
             stt.executeUpdate("DELETE FROM pasien WHERE nama='"+nama+"'");
-            BersihData();
-            tampilData();
+            clearData();
+            showData();
             SetEditOff();
             JOptionPane.showMessageDialog(this,"Data berhasil di hapus","Success",JOptionPane.INFORMATION_MESSAGE);
         } catch(SQLException e){
@@ -402,6 +410,8 @@ ResultSet RsProduk=null;
         }
     }
     
+    //process for updating data
+    //proses untuk memperbaharui data
     private void buttonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUpdateActionPerformed
         // TODO add your handling code here:
         String nama=jTextFieldNama.getText();
@@ -435,8 +445,8 @@ ResultSet RsProduk=null;
                 Connection conn=(Connection)koneksi.koneksiDB();
                 Statement stt=conn.createStatement();
                 stt.executeUpdate("UPDATE pasien SET nik='"+nik+"', nama='"+nama+"' , alamat='"+alamat+"', telepon='"+telepon+"', tglahir='"+tl+"', goldar='"+darah+"', gender='"+jk+"' WHERE nama='"+nama+"'");
-                BersihData();
-                tampilData();
+                clearData();
+                showData();
                 SetEditOff();
                 JOptionPane.showMessageDialog(this,"Data berhasil disimpan","Success",JOptionPane.INFORMATION_MESSAGE);
             } catch(SQLException e){
@@ -449,13 +459,16 @@ ResultSet RsProduk=null;
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxJKActionPerformed
 
-     //menangani proses saat tabel produk di klik
+    //handling process when click data on pasien table
+    //menangani proses saat tabel pasien di klik
     private void TabelPasienMouseClicked(java.awt.event.MouseEvent evt) {                                         
         // TODO add your handling code here:
         seteditOn();
-        tblKeForm();
+        tableToForm();
     }       
-    
+ 
+    //process for saving data
+    //proses untuk menyimpan data
     private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
         // TODO add your handling code here:
         String nama=jTextFieldNama.getText();
@@ -490,8 +503,8 @@ ResultSet RsProduk=null;
                 Statement stt=conn.createStatement();
                 stt.executeUpdate("INSERT INTO pasien(nik, nama, alamat, telepon, tglahir, goldar, gender)"+
                     "VALUES('"+nik+"','"+nama+"','"+alamat+"','"+telepon+"','"+tl+"','"+darah+"','"+jk+"')");
-                BersihData();
-                tampilData();
+                clearData();
+                showData();
                 SetEditOff();
                 JOptionPane.showMessageDialog(this,"Data berhasil disimpan","Success",JOptionPane.INFORMATION_MESSAGE);
             } catch(SQLException e){

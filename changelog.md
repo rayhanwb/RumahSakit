@@ -33,3 +33,11 @@ Added
 
 Changed
 - DataPasien connected to db
+
+**06 June 2021 - [Guntur] **
+
+Changed
+- DataPasien & DataDokter variable function
+
+Added
+- DataPasien & DataDokter comments 
