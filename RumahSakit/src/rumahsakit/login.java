@@ -5,6 +5,9 @@
  */
 package rumahsakit;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,7 +19,10 @@ public class login extends javax.swing.JFrame {
     /**
      * Creates new form login
      */
+    ResultSet rs;
+    String sql;
     public login() {
+        
         initComponents();
     }
 
@@ -92,12 +98,22 @@ public class login extends javax.swing.JFrame {
         String username = inputUsername.getText();
         String password = new String(inputPassword.getPassword());
         
-        if (username.equals("admin") && password.equals("password")){
-            JOptionPane.showMessageDialog(this,"Selamat datang admin","Success",JOptionPane.INFORMATION_MESSAGE);
-            this.dispose();
-            new menuUtama().setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(this,"Salah","Gagal",JOptionPane.ERROR_MESSAGE);
+         try {
+            Connection conn=(Connection)koneksi.koneksiDB();
+            Statement stt=conn.createStatement();
+            sql = "SELECT * FROM user WHERE username='"+username+"' AND password='"+password+"'";
+            rs = stt.executeQuery(sql);
+            if(rs.next()){
+                if(username.equals(rs.getString("username")) && password.equals(rs.getString("password"))){
+                    JOptionPane.showMessageDialog(null, "berhasil login");
+                    this.dispose();
+                    new menuUtama().setVisible(true); 
+                }
+            }else{
+                    JOptionPane.showMessageDialog(null, "username atau password salah");
+                }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }//GEN-LAST:event_buttonMasukActionPerformed
 
