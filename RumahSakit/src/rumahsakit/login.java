@@ -65,11 +65,11 @@ public class login extends javax.swing.JFrame {
         getContentPane().add(inputUsername);
         inputUsername.setBounds(250, 150, 170, 40);
 
-        jLabel6.setFont(new java.awt.Font("Helvetica Compressed", 0, 24)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(1, 1, 1));
         jLabel6.setText("Maju Jaya Medical");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(250, 360, 170, 40);
+        jLabel6.setBounds(230, 360, 200, 40);
 
         buttonMasuk.setText("Masuk");
         buttonMasuk.addActionListener(new java.awt.event.ActionListener() {

@@ -60,7 +60,7 @@ public class menuUtama extends javax.swing.JFrame {
                 buttonPasienActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonPasien, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 121, 46));
+        getContentPane().add(buttonPasien, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 121, 46));
 
         buttonDokter.setText("Data Dokter");
         buttonDokter.addActionListener(new java.awt.event.ActionListener() {
@@ -76,7 +76,7 @@ public class menuUtama extends javax.swing.JFrame {
                 buttonInvoiceActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonInvoice, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 110, 93, 46));
+        getContentPane().add(buttonInvoice, new org.netbeans.lib.awtextra.AbsoluteConstraints(463, 110, 100, 46));
 
         buttonLayanan.setText("Layanan");
         buttonLayanan.addActionListener(new java.awt.event.ActionListener() {
@@ -99,12 +99,12 @@ public class menuUtama extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("SF Pro Display", 1, 13)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(1, 1, 1));
         jLabel4.setText("Lihat Invoice");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 90, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 90, 90, -1));
 
         jLabel5.setFont(new java.awt.Font("SF Pro Display", 1, 13)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(1, 1, 1));
         jLabel5.setText("Layanan");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 250, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 250, -1, -1));
 
         jButton1.setText("Log Out");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
