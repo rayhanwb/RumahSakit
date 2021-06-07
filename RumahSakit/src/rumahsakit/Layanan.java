@@ -26,7 +26,7 @@ ResultSet RsProduk=null;
 
         private void showData(){
         try{
-            Object[] judul_kolom = {"id_pasien", "nik", "nama", "alamat", "telepon", "tglahir", "goldar", "gender"};
+            Object[] judul_kolom = {"id_layanan", "id_pasien", "id_dokter", "jenis", "keterangan", "waktu", "harga"};
             tabModel=new DefaultTableModel(null,judul_kolom);
             TabelPasien.setModel(tabModel);
             
@@ -34,17 +34,16 @@ ResultSet RsProduk=null;
             Statement stt=conn.createStatement();
             tabModel.getDataVector().removeAllElements();
             
-            RsProduk=stt.executeQuery("SELECT * from pasien ");  
+            RsProduk=stt.executeQuery("SELECT * from layanan ");  
             while(RsProduk.next()){
                 Object[] data={
+                    RsProduk.getString("id_layanan"),
                     RsProduk.getString("id_pasien"),
-                    RsProduk.getString("nik"),
-                    RsProduk.getString("nama"),
-                    RsProduk.getString("alamat"),
-                    RsProduk.getString("telepon"),
-                    RsProduk.getString("tglahir"),
-                    RsProduk.getString("goldar"), 
-                    RsProduk.getString("gender") 
+                    RsProduk.getString("id_dokter"),
+                    RsProduk.getString("jenis"),
+                    RsProduk.getString("keterangan"),
+                    RsProduk.getString("waktu"),
+                    RsProduk.getString("harga")  
                 };
                tabModel.addRow(data);
             }                
@@ -56,12 +55,12 @@ ResultSet RsProduk=null;
     //show data to form when click data on table
     //menampilkan data ke form saat data pada tabel di klik
     void tableToForm(){
-        jTextFieldHarga.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),1)+"");
-        jTextFieldIdP.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),2)+"");
-        jTextFieldIdD.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),3)+"");
+        jTextFieldIdP.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),1)+"");
+        jTextFieldIdD.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),2)+"");
+        jComboBoxJenis.setSelectedItem(tabModel.getValueAt(TabelPasien.getSelectedRow(),3)+"");
+        textAreaKet.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),4)+"");
         jTextFieldWaktu.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),5)+"");
-        jTextFieldKeterangan.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),6)+"");
-        jComboBoxJenis.setSelectedItem(tabModel.getValueAt(TabelPasien.getSelectedRow(),7)+"");
+        jTextFieldHarga.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),6)+"");
         
         buttonUpdate.setEnabled(true);
         buttonDelete.setEnabled(true);
@@ -76,7 +75,7 @@ ResultSet RsProduk=null;
         jTextFieldIdP.setText(""); 
         jTextFieldIdD.setText("");
         jTextFieldWaktu.setText("");
-        jTextFieldKeterangan.setText("");
+        textAreaKet.setText("");
         jComboBoxJenis.setSelectedIndex(0);
         
     } 
@@ -88,7 +87,7 @@ ResultSet RsProduk=null;
         jTextFieldIdP.setEnabled(false); 
         jTextFieldIdD.setEnabled(false);
         jTextFieldWaktu.setEnabled(false);
-        jTextFieldKeterangan.setEnabled(false);
+        textAreaKet.setEnabled(false);
         jComboBoxJenis.setEnabled(false);
     }
     
@@ -99,7 +98,7 @@ ResultSet RsProduk=null;
         jTextFieldIdP.setEnabled(true); 
         jTextFieldIdD.setEnabled(true);
         jTextFieldWaktu.setEnabled(true);
-        jTextFieldKeterangan.setEnabled(true);
+        textAreaKet.setEnabled(true);
         jComboBoxJenis.setEnabled(true);
     }
  
@@ -122,19 +121,20 @@ ResultSet RsProduk=null;
         jLabel3 = new javax.swing.JLabel();
         jTextFieldIdD = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextFieldKeterangan = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jTextFieldWaktu = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jTextFieldHarga = new javax.swing.JTextField();
+        textAreaKet = new java.awt.TextArea();
         buttonNew = new java.awt.Button();
         buttonUpdate = new java.awt.Button();
         buttonDelete = new java.awt.Button();
         buttonSave = new java.awt.Button();
         jComboBoxJenis = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jTextFieldIdL = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -170,59 +170,53 @@ ResultSet RsProduk=null;
                 jTextFieldIdPActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextFieldIdP, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 104, 161, -1));
+        getContentPane().add(jTextFieldIdP, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 161, -1));
 
         jLabel2.setForeground(new java.awt.Color(1, 1, 1));
         jLabel2.setText("ID Pasien");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 112, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
 
         jLabel3.setForeground(new java.awt.Color(1, 1, 1));
         jLabel3.setText("ID Dokter");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 164, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
 
         jTextFieldIdD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldIdDActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextFieldIdD, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 156, 161, -1));
+        getContentPane().add(jTextFieldIdD, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 161, -1));
 
         jLabel5.setForeground(new java.awt.Color(1, 1, 1));
         jLabel5.setText("Keterangan");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 268, -1, -1));
-
-        jTextFieldKeterangan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldKeteranganActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jTextFieldKeterangan, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 260, 161, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, -1, -1));
 
         jLabel6.setForeground(new java.awt.Color(1, 1, 1));
         jLabel6.setText("Waktu");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 320, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, -1, -1));
 
         jLabel7.setForeground(new java.awt.Color(1, 1, 1));
         jLabel7.setText("Harga");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 372, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 460, -1, -1));
 
         jTextFieldWaktu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldWaktuActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextFieldWaktu, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 312, 161, -1));
+        getContentPane().add(jTextFieldWaktu, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 410, 161, -1));
 
         jLabel8.setForeground(new java.awt.Color(1, 1, 1));
         jLabel8.setText("Jenis ");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 216, -1, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, -1, -1));
 
         jTextFieldHarga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldHargaActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextFieldHarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 364, 161, -1));
+        getContentPane().add(jTextFieldHarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 450, 161, -1));
+        getContentPane().add(textAreaKet, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 310, 160, -1));
 
         buttonNew.setLabel("New");
         buttonNew.setName(""); // NOI18N
@@ -231,7 +225,7 @@ ResultSet RsProduk=null;
                 buttonNewActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonNew, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 465, -1, -1));
+        getContentPane().add(buttonNew, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 510, -1, -1));
 
         buttonUpdate.setLabel("Update");
         buttonUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -239,10 +233,15 @@ ResultSet RsProduk=null;
                 buttonUpdateActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 465, -1, -1));
+        getContentPane().add(buttonUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 510, -1, -1));
 
         buttonDelete.setLabel("Delete");
-        getContentPane().add(buttonDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(167, 465, -1, -1));
+        buttonDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDeleteActionPerformed(evt);
+            }
+        });
+        getContentPane().add(buttonDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 510, -1, -1));
 
         buttonSave.setLabel("Save");
         buttonSave.addActionListener(new java.awt.event.ActionListener() {
@@ -250,21 +249,28 @@ ResultSet RsProduk=null;
                 buttonSaveActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(234, 465, 57, -1));
+        getContentPane().add(buttonSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 510, 57, -1));
 
-        jComboBoxJenis.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kontrol", "Che" }));
+        jComboBoxJenis.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Umum", "Khusus" }));
         jComboBoxJenis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxJenisActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboBoxJenis, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 208, 161, -1));
-
-        jLabel10.setIcon(new javax.swing.ImageIcon("/home/irfannm/NetBeansProjects/RumahSakit/RumahSakit/src/rumahsakit/Logo-PBO-kecil-bgt.png")); // NOI18N
+        getContentPane().add(jComboBoxJenis, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 250, 161, -1));
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, -1, -1));
 
-        jLabel9.setIcon(new javax.swing.ImageIcon("/home/irfannm/NetBeansProjects/RumahSakit/RumahSakit/src/rumahsakit/Bg-PBO-coab.jpg")); // NOI18N
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 620));
+        jLabel4.setForeground(new java.awt.Color(1, 1, 1));
+        jLabel4.setText("ID Layanan");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
+
+        jTextFieldIdL.setToolTipText("");
+        jTextFieldIdL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldIdLActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jTextFieldIdL, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 161, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -276,14 +282,6 @@ ResultSet RsProduk=null;
     private void jTextFieldIdDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldIdDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldIdDActionPerformed
-
-    private void jTextFieldKeteranganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldKeteranganActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldKeteranganActionPerformed
-
-    private void jTextFieldWaktuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldWaktuActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldWaktuActionPerformed
 
     private void jTextFieldHargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldHargaActionPerformed
         // TODO add your handling code here:
@@ -298,65 +296,41 @@ ResultSet RsProduk=null;
         buttonUpdate.setEnabled(false);
         buttonDelete.setEnabled(false);
         seteditOn();
+        jTextFieldIdL.setEnabled(false);
     }//GEN-LAST:event_buttonNewActionPerformed
 
-    //process for deleting data
-    //proses untuk menghapus data
-    private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        // TODO add your handling code here:
-        String nama=jTextFieldIdP.getText();
-
-        if (nama.isEmpty() ) {
-            JOptionPane.showMessageDialog(null,"Kode produk tidak boleh kosong");
-            jTextFieldIdP.requestFocus();
-        }else if(JOptionPane.showConfirmDialog(null,"Apakah anda yakin akan menghapus data ini?",
-            "Informasi",JOptionPane.OK_CANCEL_OPTION,JOptionPane.INFORMATION_MESSAGE)==JOptionPane.OK_OPTION){
-        try{
-            Connection conn=(Connection)koneksi.koneksiDB();
-            Statement stt=conn.createStatement();
-            stt.executeUpdate("DELETE FROM pasien WHERE nama='"+nama+"'");
-            clearData();
-            showData();
-            SetEditOff();
-            JOptionPane.showMessageDialog(this,"Data berhasil di hapus","Success",JOptionPane.INFORMATION_MESSAGE);
-        } catch(SQLException e){
-            JOptionPane.showMessageDialog(this,"Delete data gagal\n"+e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
-        }
-        }
-    }
-    
     //process for updating data
     //proses untuk memperbaharui data
     private void buttonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUpdateActionPerformed
         // TODO add your handling code here:
-        String nama=jTextFieldIdP.getText();
-        String jk=jComboBoxJenis.getSelectedItem().toString();
-        String nik=jTextFieldHarga.getText();
-        String alamat=jTextFieldIdD.getText();
-      
-        String tl=jTextFieldWaktu.getText();
-        String darah=jTextFieldKeterangan.getText();        
+        String id_p=jTextFieldIdP.getText();
+        String jenis=jComboBoxJenis.getSelectedItem().toString();
+        String harga=jTextFieldHarga.getText();
+        String id_d=jTextFieldIdD.getText();
+        String ket=textAreaKet.getText();        
+        String id_layanan=textAreaKet.getText();
         
-        if (nama.isEmpty() ) {
-            JOptionPane.showMessageDialog(null,"Nama tidak boleh dikosongkan!");
+        java.util.Date tanggal = new java.util.Date();
+        java.text.SimpleDateFormat TanggalFormat= new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String waktu=TanggalFormat.format(tanggal);
+        
+        if (!(new Scanner(id_p).hasNextInt())) {
+            JOptionPane.showMessageDialog(null,"ID Pasien harus angka");
             jTextFieldIdP.requestFocus();
-        }else if (nik.isEmpty()) {
-            JOptionPane.showMessageDialog(null,"NIK tidak boleh dikosongkan!");
-            jTextFieldHarga.requestFocus();
-        }else if (alamat.isEmpty()) {
-            JOptionPane.showMessageDialog(null,"Alamat tidak boleh dikosongkan!");
+        }else if (!(new Scanner(id_d).hasNextInt())) {
+            JOptionPane.showMessageDialog(null,"ID Dokter harus angka");
             jTextFieldIdD.requestFocus();
-        }else if (tl.isEmpty()) {
-            JOptionPane.showMessageDialog(null,"Tanggal lahir tidak boleh dikosongkan!");
-            jTextFieldWaktu.requestFocus();
-        }else if (darah.isEmpty()) {
-            JOptionPane.showMessageDialog(null,"Darah tidak boleh dikosongkan!");
-            jTextFieldKeterangan.requestFocus();
+        }else if (ket.isEmpty()) {
+            JOptionPane.showMessageDialog(null,"Keterangan tidak boleh dikosongkan!");
+            textAreaKet.requestFocus();
+        }else if (!(new Scanner(harga).hasNextInt())) {
+            JOptionPane.showMessageDialog(null,"Harga produk harus angka");
+            jTextFieldHarga.requestFocus();
         }else{
             try{
                 Connection conn=(Connection)koneksi.koneksiDB();
                 Statement stt=conn.createStatement();
-                stt.executeUpdate("UPDATE pasien SET nik='"+nik+"', nama='"+nama+"' , alamat='"+alamat+"', tglahir='"+tl+"', goldar='"+darah+"', gender='"+jk+"' WHERE nama='"+nama+"'");
+                stt.executeUpdate("UPDATE layanan SET id_pasien='"+id_p+"', id_dokter='"+id_d+"', jenis='"+jenis+"', keterangan='"+ket+"', waktu='"+waktu+"', harga='"+harga+"' WHERE id_layanan='"+id_layanan+"' ");
                 clearData();
                 showData();
                 SetEditOff();
@@ -375,34 +349,34 @@ ResultSet RsProduk=null;
     //proses untuk menyimpan data
     private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
         // TODO add your handling code here:
-        String nama=jTextFieldIdP.getText();
-        String jk=jComboBoxJenis.getSelectedItem().toString();
-        String nik=jTextFieldHarga.getText();
-        String alamat=jTextFieldIdD.getText();
-        String tl=jTextFieldWaktu.getText();
-        String darah=jTextFieldKeterangan.getText();        
+        String id_p=jTextFieldIdP.getText();
+        String jenis=jComboBoxJenis.getSelectedItem().toString();
+        String harga=jTextFieldHarga.getText();
+        String id_d=jTextFieldIdD.getText();
+        String ket=textAreaKet.getText();        
         
-        if (nama.isEmpty() ) {
-            JOptionPane.showMessageDialog(null,"Nama tidak boleh dikosongkan!");
+        java.util.Date tanggal = new java.util.Date();
+        java.text.SimpleDateFormat TanggalFormat= new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String waktu=TanggalFormat.format(tanggal);
+        
+       if (!(new Scanner(id_p).hasNextInt())) {
+            JOptionPane.showMessageDialog(null,"ID Pasien harus angka");
             jTextFieldIdP.requestFocus();
-        }else if (nik.isEmpty()) {
-            JOptionPane.showMessageDialog(null,"NIK tidak boleh dikosongkan!");
-            jTextFieldHarga.requestFocus();
-        }else if (alamat.isEmpty()) {
-            JOptionPane.showMessageDialog(null,"Alamat tidak boleh dikosongkan!");
+        }else if (!(new Scanner(id_d).hasNextInt())) {
+            JOptionPane.showMessageDialog(null,"ID Dokter harus angka");
             jTextFieldIdD.requestFocus();
-        }else if (tl.isEmpty()) {
-            JOptionPane.showMessageDialog(null,"Tanggal lahir tidak boleh dikosongkan!");
-            jTextFieldWaktu.requestFocus();
-        }else if (darah.isEmpty()) {
-            JOptionPane.showMessageDialog(null,"Darah tidak boleh dikosongkan!");
-            jTextFieldKeterangan.requestFocus();
+        }else if (ket.isEmpty()) {
+            JOptionPane.showMessageDialog(null,"Keterangan tidak boleh dikosongkan!");
+            textAreaKet.requestFocus();
+        }else if (!(new Scanner(harga).hasNextInt())) {
+            JOptionPane.showMessageDialog(null,"Harga produk harus angka");
+            jTextFieldHarga.requestFocus();
         }else{
             try{
                 Connection conn=(Connection)koneksi.koneksiDB();
                 Statement stt=conn.createStatement();
-                stt.executeUpdate("INSERT INTO pasien(nik, nama, alamat, telepon, tglahir, goldar, gender)"+
-                    "VALUES('"+nik+"','"+nama+"','"+alamat+"','"+tl+"','"+darah+"','"+jk+"')");
+                stt.executeUpdate("INSERT INTO layanan(id_pasien, id_dokter, jenis, keterangan, waktu, harga)"+
+                    "VALUES('"+id_p+"','"+id_d+"','"+jenis+"','"+ket+"','"+waktu+"','"+harga+"')");
                 clearData();
                 showData();
                 SetEditOff();
@@ -418,8 +392,42 @@ ResultSet RsProduk=null;
     private void TabelPasienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelPasienMouseClicked
         // TODO add your handling code here:
         seteditOn();
+        jTextFieldIdL.setEnabled(false);
         tableToForm();
     }//GEN-LAST:event_TabelPasienMouseClicked
+
+    private void jTextFieldWaktuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldWaktuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldWaktuActionPerformed
+
+    private void jTextFieldIdLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldIdLActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldIdLActionPerformed
+
+    //process for deleting data
+    //proses untuk menghapus data
+    private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
+        // TODO add your handling code here:
+         String id_layanan=jTextFieldIdL.getText();
+
+        if (id_layanan.isEmpty() ) {
+            JOptionPane.showMessageDialog(null,"Id Layanan kosong");
+            jTextFieldIdP.requestFocus();
+        }else if(JOptionPane.showConfirmDialog(null,"Apakah anda yakin akan menghapus data ini?",
+            "Informasi",JOptionPane.OK_CANCEL_OPTION,JOptionPane.INFORMATION_MESSAGE)==JOptionPane.OK_OPTION){
+        try{
+            Connection conn=(Connection)koneksi.koneksiDB();
+            Statement stt=conn.createStatement();
+            stt.executeUpdate("DELETE FROM layanan WHERE id_layanan='"+id_layanan+"'");
+            clearData();
+            showData();
+            SetEditOff();
+            JOptionPane.showMessageDialog(this,"Data berhasil di hapus","Success",JOptionPane.INFORMATION_MESSAGE);
+        } catch(SQLException e){
+            JOptionPane.showMessageDialog(this,"Delete data gagal\n"+e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+        }
+        }
+    }//GEN-LAST:event_buttonDeleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -467,16 +475,17 @@ ResultSet RsProduk=null;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextFieldHarga;
     private javax.swing.JTextField jTextFieldIdD;
+    private javax.swing.JTextField jTextFieldIdL;
     private javax.swing.JTextField jTextFieldIdP;
-    private javax.swing.JTextField jTextFieldKeterangan;
     private javax.swing.JTextField jTextFieldWaktu;
+    private java.awt.TextArea textAreaKet;
     // End of variables declaration//GEN-END:variables
 }

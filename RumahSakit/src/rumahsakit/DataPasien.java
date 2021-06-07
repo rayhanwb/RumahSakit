@@ -262,6 +262,11 @@ ResultSet RsProduk=null;
         getContentPane().add(buttonUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 379, -1, -1));
 
         buttonDelete.setLabel("Delete");
+        buttonDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDeleteActionPerformed(evt);
+            }
+        });
         getContentPane().add(buttonDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 379, -1, -1));
 
         buttonSave.setLabel("Save");
