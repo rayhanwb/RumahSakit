@@ -47,13 +47,13 @@ ResultSet RsProduk=null;
                     RsProduk.getString("gender"),
                     RsProduk.getString("spesialisasi")
                 };
-               tabModel.addRow(data);
+            tabModel.addRow(data);
             }                
         } catch (Exception ex) {
         System.err.println(ex.getMessage());
         }
     }
-   
+
     //show data to form when click data on table
     //menampilkan data ke form saat data pada tabel di klik 
     void tableToForm(){

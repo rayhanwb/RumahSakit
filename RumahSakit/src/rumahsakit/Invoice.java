@@ -21,9 +21,9 @@ ResultSet rsinvoice=null;
      */
     public Invoice() {
         initComponents();
-        tampilData();
+        
     }
-        private void tampilData(){
+        private void tampilData(String number_input){
         try{
             Object[] judul_kolom = {"id_layanan", "id_pasien", "id_dokter", "jenis", "keterangan", "waktu", "harga"};
             tabModel=new DefaultTableModel(null,judul_kolom);
@@ -32,8 +32,7 @@ ResultSet rsinvoice=null;
             Connection conn=(Connection)koneksi.koneksiDB();
             Statement stt=conn.createStatement();
             tabModel.getDataVector().removeAllElements();
-            
-            rsinvoice=stt.executeQuery("SELECT * from layanan ");  
+            rsinvoice=stt.executeQuery("SELECT * from layanan where id_pasien = '" + number_input + "' ");  
             while(rsinvoice.next()){
                 Object[] data={
                     rsinvoice.getString("id_layanan"),
@@ -49,6 +48,23 @@ ResultSet rsinvoice=null;
         } catch (Exception ex) {
         System.err.println(ex.getMessage());
         }
+        
+    }
+
+        private void TotalHarga(String number_input){
+        try{
+            Object[] judul_kolom = {"id_layanan", "id_pasien", "id_dokter", "jenis", "keterangan", "waktu", "harga"};            
+            Connection conn=(Connection)koneksi.koneksiDB();
+            Statement stt=conn.createStatement();
+            rsinvoice=stt.executeQuery("SELECT SUM(harga) as total from layanan where id_pasien = '" + number_input + "' ");  
+            while(rsinvoice.next()){
+                String data = rsinvoice.getString("total");
+                labelhasil.setText("Rp "+data+",-");
+            }                
+        } catch (Exception ex) {
+        System.err.println(ex.getMessage());
+        }
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -63,23 +79,23 @@ ResultSet rsinvoice=null;
         TableInvoice = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        buttonget = new javax.swing.JButton();
+        buttonclear = new javax.swing.JButton();
+        jTextFieldnim = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        labelhasil = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         TableInvoice.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "id_layanan", "id_pasien", "id_dokter", "jenis", "keterangan", "waktu", "harga"
             }
         ));
         jScrollPane1.setViewportView(TableInvoice);
@@ -88,35 +104,36 @@ ResultSet rsinvoice=null;
         jLabel1.setText("Invoice");
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jLabel2.setText("Masukan NIM");
+        jLabel2.setText("Masukan Id_Pasien");
 
-        jButton1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jButton1.setText("Get");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonget.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        buttonget.setText("Get");
+        buttonget.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                buttongetActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jButton2.setText("Clear");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        buttonclear.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        buttonclear.setText("Clear");
+        buttonclear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                buttonclearActionPerformed(evt);
             }
         });
 
-        jTextField1.setText(" ");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldnim.setText(" ");
+        jTextFieldnim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                jTextFieldnimActionPerformed(evt);
             }
         });
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel3.setText("Total Biaya");
 
-        jLabel4.setText("jLabel4");
+        labelhasil.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        labelhasil.setText("Rp 0,-");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -126,19 +143,19 @@ ResultSet rsinvoice=null;
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(59, 59, 59)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonget, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(buttonclear, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(45, 45, 45)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3))
                         .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldnim, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelhasil, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27))
             .addGroup(layout.createSequentialGroup()
@@ -156,15 +173,15 @@ ResultSet rsinvoice=null;
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldnim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(64, 64, 64)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(labelhasil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(120, 120, 120)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(buttonget, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buttonclear, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20))
         );
@@ -172,17 +189,26 @@ ResultSet rsinvoice=null;
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void buttongetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttongetActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        String a = jTextFieldnim.getText();
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        tampilData(a);
+        TotalHarga(a);
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        
+    }//GEN-LAST:event_buttongetActionPerformed
+
+    private void buttonclearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonclearActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+        jTextFieldnim.setText("");
+        labelhasil.setText("Rp 0.00,-");
+        tampilData(null);;
+    }//GEN-LAST:event_buttonclearActionPerformed
+
+    private void jTextFieldnimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldnimActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldnimActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,16 +244,15 @@ ResultSet rsinvoice=null;
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TableInvoice;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton buttonclear;
+    private javax.swing.JButton buttonget;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextFieldnim;
+    private javax.swing.JLabel labelhasil;
     // End of variables declaration//GEN-END:variables
 }

@@ -46,3 +46,8 @@ Added
 
 Added
 - Invoice.java
+
+**07 June 2021 - [Rayhan] **
+
+Fixed
+- Invoice.java worked
