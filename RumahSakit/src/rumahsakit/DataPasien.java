@@ -139,11 +139,11 @@ ResultSet RS=null;
         buttonDelete = new java.awt.Button();
         buttonSave = new java.awt.Button();
         jComboBoxJK = new javax.swing.JComboBox<>();
-        jLabel10 = new javax.swing.JLabel();
         button1 = new java.awt.Button();
-        buttonKembali = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Maju Jaya Medical");
         setMinimumSize(new java.awt.Dimension(1117, 630));
         setPreferredSize(new java.awt.Dimension(1117, 630));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -285,10 +285,6 @@ ResultSet RS=null;
         });
         getContentPane().add(jComboBoxJK, new org.netbeans.lib.awtextra.AbsoluteConstraints(141, 324, 160, -1));
 
-        jLabel10.setIcon(new javax.swing.ImageIcon("/home/irfannm/NetBeansProjects/RumahSakit/RumahSakit/src/rumahsakit/Logo-PBO-kecil-bgt.png")); // NOI18N
-        jLabel10.setText("iconjan");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 30, -1));
-
         button1.setLabel("Kembali");
         button1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -297,8 +293,9 @@ ResultSet RS=null;
         });
         getContentPane().add(button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 450, -1, -1));
 
-        buttonKembali.setIcon(new javax.swing.ImageIcon("/home/irfannm/NetBeansProjects/RumahSakit/RumahSakit/src/rumahsakit/Bg-PBO-coab.jpg")); // NOI18N
-        getContentPane().add(buttonKembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1110, 590));
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rumahsakit/Bg-PBO-coab.jpg"))); // NOI18N
+        jLabel9.setText("Background");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 590));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -337,32 +334,7 @@ ResultSet RS=null;
         buttonDelete.setEnabled(false);
         seteditOn();
     }//GEN-LAST:event_buttonNewActionPerformed
-
-    //process for deleting data
-    //proses untuk menghapus data
-    private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        // TODO add your handling code here:
-        String nama=jTextFieldNama.getText();
-
-        if (nama.isEmpty() ) {
-            JOptionPane.showMessageDialog(null,"Kode produk tidak boleh kosong");
-            jTextFieldNama.requestFocus();
-        }else if(JOptionPane.showConfirmDialog(null,"Apakah anda yakin akan menghapus data ini?",
-            "Informasi",JOptionPane.OK_CANCEL_OPTION,JOptionPane.INFORMATION_MESSAGE)==JOptionPane.OK_OPTION){
-        try{
-            Connection conn=(Connection)koneksi.koneksiDB();
-            Statement stt=conn.createStatement();
-            stt.executeUpdate("DELETE FROM pasien WHERE nama='"+nama+"'");
-            clearData();
-            showData();
-            SetEditOff();
-            JOptionPane.showMessageDialog(this,"Data berhasil di hapus","Success",JOptionPane.INFORMATION_MESSAGE);
-        } catch(SQLException e){
-            JOptionPane.showMessageDialog(this,"Delete data gagal\n"+e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
-        }
-        }
-    }
-    
+  
     //process for updating data
     //proses untuk memperbaharui data
     private void buttonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUpdateActionPerformed
@@ -472,6 +444,31 @@ ResultSet RS=null;
         new menuUtama().setVisible(true);
     }//GEN-LAST:event_button1ActionPerformed
 
+    //process for deleting data
+    //proses untuk menghapus data
+    private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
+        // TODO add your handling code here:
+        String nama=jTextFieldNama.getText();
+
+        if (nama.isEmpty() ) {
+            JOptionPane.showMessageDialog(null,"Kode produk tidak boleh kosong");
+            jTextFieldNama.requestFocus();
+        }else if(JOptionPane.showConfirmDialog(null,"Apakah anda yakin akan menghapus data ini?",
+            "Informasi",JOptionPane.OK_CANCEL_OPTION,JOptionPane.INFORMATION_MESSAGE)==JOptionPane.OK_OPTION){
+        try{
+            Connection conn=(Connection)koneksi.koneksiDB();
+            Statement stt=conn.createStatement();
+            stt.executeUpdate("DELETE FROM pasien WHERE nama='"+nama+"'");
+            clearData();
+            showData();
+            SetEditOff();
+            JOptionPane.showMessageDialog(this,"Data berhasil di hapus","Success",JOptionPane.INFORMATION_MESSAGE);
+        } catch(SQLException e){
+            JOptionPane.showMessageDialog(this,"Delete data gagal\n"+e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+        }
+        }
+    }//GEN-LAST:event_buttonDeleteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -511,13 +508,11 @@ ResultSet RS=null;
     private javax.swing.JTable TabelPasien;
     private java.awt.Button button1;
     private java.awt.Button buttonDelete;
-    private javax.swing.JLabel buttonKembali;
     private java.awt.Button buttonNew;
     private java.awt.Button buttonSave;
     private java.awt.Button buttonUpdate;
     private javax.swing.JComboBox<String> jComboBoxJK;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -525,6 +520,7 @@ ResultSet RS=null;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextFieldAlamat;
     private javax.swing.JTextField jTextFieldDarah;

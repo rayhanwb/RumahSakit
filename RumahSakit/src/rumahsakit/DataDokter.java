@@ -146,12 +146,15 @@ ResultSet RS=null;
         jComboBoxJK = new javax.swing.JComboBox<>();
         jTextFieldSpesialisasi = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         buttonKembali = new java.awt.Button();
-        jLabel10 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setTitle("Maju Jaya Medical");
+        setMinimumSize(new java.awt.Dimension(1115, 580));
+        setPreferredSize(new java.awt.Dimension(1115, 580));
+        getContentPane().setLayout(null);
 
         TabelDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -171,12 +174,14 @@ ResultSet RS=null;
         });
         jScrollPane1.setViewportView(TabelDokter);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 70, 739, 510));
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(350, 60, 739, 450);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(1, 1, 1));
         jLabel1.setText("Data Dokter");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(122, 6, -1, -1));
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(122, 6, 193, 47);
 
         jTextFieldNama.setToolTipText("");
         jTextFieldNama.addActionListener(new java.awt.event.ActionListener() {
@@ -184,70 +189,83 @@ ResultSet RS=null;
                 jTextFieldNamaActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextFieldNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 72, 161, -1));
+        getContentPane().add(jTextFieldNama);
+        jTextFieldNama.setBounds(140, 72, 161, 24);
 
         jLabel2.setForeground(new java.awt.Color(1, 1, 1));
         jLabel2.setText("Nama");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 76, -1, -1));
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(43, 76, 80, 16);
 
         jLabel3.setForeground(new java.awt.Color(1, 1, 1));
         jLabel3.setText("Alamat");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 118, -1, -1));
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(43, 118, 80, 16);
 
         jTextFieldAlamat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldAlamatActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextFieldAlamat, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 114, 161, -1));
+        getContentPane().add(jTextFieldAlamat);
+        jTextFieldAlamat.setBounds(140, 114, 161, 24);
 
         jTextFieldTelepon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldTeleponActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextFieldTelepon, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 156, 161, -1));
+        getContentPane().add(jTextFieldTelepon);
+        jTextFieldTelepon.setBounds(140, 156, 161, 24);
 
         jLabel4.setForeground(new java.awt.Color(1, 1, 1));
         jLabel4.setText("Telepon");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 160, -1, -1));
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(43, 160, 80, 16);
 
         jLabel5.setForeground(new java.awt.Color(1, 1, 1));
         jLabel5.setText("Darah");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 202, -1, -1));
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(43, 202, 80, 16);
 
         jTextFieldDarah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldDarahActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextFieldDarah, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 198, 161, -1));
+        getContentPane().add(jTextFieldDarah);
+        jTextFieldDarah.setBounds(140, 198, 161, 24);
 
         jLabel6.setForeground(new java.awt.Color(1, 1, 1));
         jLabel6.setText("Tanggal Lahir");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 244, -1, -1));
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(43, 244, 77, 16);
 
         jTextFieldTL.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldTLActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextFieldTL, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 161, -1));
+        getContentPane().add(jTextFieldTL);
+        jTextFieldTL.setBounds(140, 240, 161, 24);
 
         jLabel7.setForeground(new java.awt.Color(1, 1, 1));
         jLabel7.setText("NIK");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 286, -1, -1));
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(43, 286, 70, 16);
 
         jLabel8.setForeground(new java.awt.Color(1, 1, 1));
         jLabel8.setText("Jenis Kelamin");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 329, -1, -1));
+        getContentPane().add(jLabel8);
+        jLabel8.setBounds(43, 329, 80, 16);
 
         jTextFieldNIK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldNIKActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextFieldNIK, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 282, 161, -1));
+        getContentPane().add(jTextFieldNIK);
+        jTextFieldNIK.setBounds(140, 282, 161, 24);
 
         buttonNew.setLabel("New");
         buttonNew.setName(""); // NOI18N
@@ -256,7 +274,8 @@ ResultSet RS=null;
                 buttonNewActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonNew, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 430, -1, -1));
+        getContentPane().add(buttonNew);
+        buttonNew.setBounds(43, 430, 41, 24);
 
         buttonUpdate.setLabel("Update");
         buttonUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -264,7 +283,8 @@ ResultSet RS=null;
                 buttonUpdateActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 430, -1, -1));
+        getContentPane().add(buttonUpdate);
+        buttonUpdate.setBounds(94, 430, 56, 24);
 
         buttonDelete.setLabel("Delete");
         buttonDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -272,7 +292,8 @@ ResultSet RS=null;
                 buttonDeleteActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 430, -1, -1));
+        getContentPane().add(buttonDelete);
+        buttonDelete.setBounds(160, 430, 52, 24);
 
         buttonSave.setLabel("Save");
         buttonSave.addActionListener(new java.awt.event.ActionListener() {
@@ -280,7 +301,8 @@ ResultSet RS=null;
                 buttonSaveActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 430, 57, -1));
+        getContentPane().add(buttonSave);
+        buttonSave.setBounds(222, 430, 57, 24);
 
         jComboBoxJK.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "L", "P" }));
         jComboBoxJK.addActionListener(new java.awt.event.ActionListener() {
@@ -288,22 +310,21 @@ ResultSet RS=null;
                 jComboBoxJKActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboBoxJK, new org.netbeans.lib.awtextra.AbsoluteConstraints(141, 324, 160, -1));
+        getContentPane().add(jComboBoxJK);
+        jComboBoxJK.setBounds(141, 324, 160, 26);
 
         jTextFieldSpesialisasi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldSpesialisasiActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextFieldSpesialisasi, new org.netbeans.lib.awtextra.AbsoluteConstraints(141, 368, 160, -1));
+        getContentPane().add(jTextFieldSpesialisasi);
+        jTextFieldSpesialisasi.setBounds(141, 368, 160, 24);
 
         jLabel9.setForeground(new java.awt.Color(1, 1, 1));
         jLabel9.setText("Spesialisasi");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 372, -1, -1));
-
-        jLabel11.setIcon(new javax.swing.ImageIcon("/home/irfannm/NetBeansProjects/RumahSakit/RumahSakit/src/rumahsakit/Logo-PBO-kecil-bgt.png")); // NOI18N
-        jLabel11.setText("iconjan");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 30, -1));
+        getContentPane().add(jLabel9);
+        jLabel9.setBounds(43, 372, 80, 16);
 
         buttonKembali.setLabel("Kembali");
         buttonKembali.addActionListener(new java.awt.event.ActionListener() {
@@ -311,11 +332,18 @@ ResultSet RS=null;
                 buttonKembaliActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonKembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 480, -1, -1));
+        getContentPane().add(buttonKembali);
+        buttonKembali.setBounds(40, 480, 62, 24);
 
-        jLabel10.setIcon(new javax.swing.ImageIcon("/home/irfannm/NetBeansProjects/RumahSakit/RumahSakit/src/rumahsakit/Bg-PBO-coab.jpg")); // NOI18N
-        jLabel10.setText("buatbg");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 590));
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rumahsakit/Logo-PBO-kecil-bgt.png"))); // NOI18N
+        jLabel13.setText("Logo");
+        getContentPane().add(jLabel13);
+        jLabel13.setBounds(10, 10, 30, 30);
+
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rumahsakit/Bg-PBO-coab.jpg"))); // NOI18N
+        jLabel12.setText("Background");
+        getContentPane().add(jLabel12);
+        jLabel12.setBounds(0, 0, 1100, 540);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -549,8 +577,8 @@ ResultSet RS=null;
     private java.awt.Button buttonUpdate;
     private javax.swing.JComboBox<String> jComboBoxJK;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

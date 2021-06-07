@@ -38,42 +38,38 @@ public class login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         inputUsername = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         buttonMasuk = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
         inputPassword = new javax.swing.JPasswordField();
+        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel2.setForeground(new java.awt.Color(1, 1, 1));
-        jLabel2.setText("Sistem Informasi ");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, -1, -1));
-
-        jLabel3.setFont(new java.awt.Font("SF Pro Display", 1, 13)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(1, 1, 1));
-        jLabel3.setText("Rumah Sakit");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 90, -1));
+        setTitle("Maju Jaya Medical");
+        setMinimumSize(new java.awt.Dimension(666, 460));
+        setPreferredSize(new java.awt.Dimension(666, 460));
+        getContentPane().setLayout(null);
 
         jLabel4.setForeground(new java.awt.Color(1, 1, 1));
         jLabel4.setText("Username");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 70, -1));
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(160, 160, 70, 16);
 
         jLabel5.setForeground(new java.awt.Color(1, 1, 1));
         jLabel5.setText("Passsword");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 280, 70, -1));
-        getContentPane().add(inputUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, 170, 40));
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(160, 230, 70, 16);
+        getContentPane().add(inputUsername);
+        inputUsername.setBounds(250, 150, 170, 40);
 
-        jLabel6.setFont(new java.awt.Font("SF Pro Display", 1, 24)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Helvetica Compressed", 0, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(1, 1, 1));
-        jLabel6.setText("Login");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 120, 70, 40));
+        jLabel6.setText("Maju Jaya Medical");
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(250, 360, 170, 40);
 
         buttonMasuk.setText("Masuk");
         buttonMasuk.addActionListener(new java.awt.event.ActionListener() {
@@ -81,17 +77,20 @@ public class login extends javax.swing.JFrame {
                 buttonMasukActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonMasuk, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 340, 70, 40));
+        getContentPane().add(buttonMasuk);
+        buttonMasuk.setBounds(290, 290, 90, 40);
+        getContentPane().add(inputPassword);
+        inputPassword.setBounds(250, 220, 170, 40);
 
-        jLabel7.setIcon(new javax.swing.ImageIcon("/home/irfannm/NetBeansProjects/RumahSakit/RumahSakit/src/rumahsakit/Logo-PBO-kecil-bgt.png")); // NOI18N
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 30, 40));
-        getContentPane().add(inputPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 270, 170, 40));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rumahsakit/Logo-PBO-kecil.png"))); // NOI18N
+        jLabel2.setText("Logo");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(280, 20, 100, 100);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("/home/irfannm/NetBeansProjects/RumahSakit/RumahSakit/src/rumahsakit/Bg-PBO-coab.jpg")); // NOI18N
-        jLabel1.setMaximumSize(new java.awt.Dimension(600, 619));
-        jLabel1.setMinimumSize(new java.awt.Dimension(600, 619));
-        jLabel1.setPreferredSize(new java.awt.Dimension(600, 619));
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 450));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rumahsakit/Login-PBO.jpg"))); // NOI18N
+        jLabel1.setText("Background");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, 0, 650, 420);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -161,10 +160,8 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JTextField inputUsername;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     // End of variables declaration//GEN-END:variables
 }

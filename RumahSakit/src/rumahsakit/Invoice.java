@@ -9,6 +9,15 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.util.Scanner;
 import java.awt.*;
+   import java.io.FileOutputStream;
+    import com.itextpdf.text.Document;
+    import com.itextpdf.text.Paragraph;
+    import com.itextpdf.text.Phrase;
+    import com.itextpdf.text.pdf.PdfWriter;
+    import com.itextpdf.text.pdf.PdfPTable;
+    import com.itextpdf.text.pdf.PdfPCell;
+    import com.itextpdf.text.Image;
+import static rumahsakit.generatePDF.printpdf;
 /**
  *
  * @author X230
@@ -66,6 +75,68 @@ ResultSet rsinvoice=null;
         }
         
     }
+            public static void printpdf(String idpelanggan){
+    try{
+    String file_name="..\\InvoicePasien.pdf";
+    Document document=new Document();
+    PdfWriter.getInstance(document, new FileOutputStream(file_name));
+    document.open();
+    document.add(Image.getInstance( "src\\RumahSakit\\kop.png" ));
+    Connection connection=(Connection)koneksi.koneksiDB();
+    ResultSet rs=null;
+    PreparedStatement ps=null;
+
+    String query = "select * from layanan where id_pasien = '"+idpelanggan +"'";
+    ps=connection.prepareStatement(query);
+    rs=ps.executeQuery();
+
+    PdfPTable table = new PdfPTable(5);
+    PdfPCell cl = new PdfPCell(new Phrase("Waktu"));
+    table.addCell(cl);
+    cl = new PdfPCell(new Phrase("Id_Pasien"));
+    table.addCell(cl);
+    cl = new PdfPCell(new Phrase("Jenis Layanan"));
+    table.addCell(cl);
+    cl = new PdfPCell(new Phrase("Keterangan"));
+    table.addCell(cl);
+    cl = new PdfPCell(new Phrase("Biaya"));
+    table.addCell(cl);
+    table.setHeaderRows(1);
+    document.add(new Paragraph("Rincian:"));
+    document.add(new Paragraph(" "));
+    while(rs.next()){
+    table.addCell(rs.getString("waktu"));
+    table.addCell(rs.getString("id_pasien"));
+    table.addCell(rs.getString("jenis"));
+    table.addCell(rs.getString("keterangan"));
+    table.addCell(rs.getString("harga"));
+    }    
+    ResultSet rsinvoice=null;
+    Connection conn=(Connection)koneksi.koneksiDB();
+    Statement stt=conn.createStatement();
+    rsinvoice=stt.executeQuery("SELECT SUM(harga) as total from layanan where   id_pasien = '"+idpelanggan +"'");  
+
+         
+    System.out.println("Finish");
+    document.add(table);
+    
+    document.add(new Paragraph(" "));
+        while(rsinvoice.next()){
+        String data = rsinvoice.getString("total");
+        document.add(new Paragraph("Total biaya yang harus dibayar sebesar: Rp "+data+",-")); 
+        document.add(new Paragraph(""));
+        document.add(new Paragraph(" "));
+        document.add(new Paragraph(" "));
+        }     
+    document.close();
+}
+catch(Exception e){
+System.err.println(e);
+}    
+        
+        
+    };
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -79,13 +150,21 @@ ResultSet rsinvoice=null;
         TableInvoice = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        buttonget = new javax.swing.JButton();
-        buttonclear = new javax.swing.JButton();
         jTextFieldnim = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         labelhasil = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        button2 = new java.awt.Button();
+        button1 = new java.awt.Button();
+        button3 = new java.awt.Button();
+        button4 = new java.awt.Button();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Maju Jaya Medical");
+        setMinimumSize(new java.awt.Dimension(915, 560));
+        setPreferredSize(new java.awt.Dimension(915, 560));
+        getContentPane().setLayout(null);
 
         TableInvoice.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -100,27 +179,18 @@ ResultSet rsinvoice=null;
         ));
         jScrollPane1.setViewportView(TableInvoice);
 
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(420, 77, 453, 403);
+
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         jLabel1.setText("Invoice");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(378, 12, 110, 47);
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel2.setText("Masukan Id_Pasien");
-
-        buttonget.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        buttonget.setText("Get");
-        buttonget.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttongetActionPerformed(evt);
-            }
-        });
-
-        buttonclear.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        buttonclear.setText("Clear");
-        buttonclear.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonclearActionPerformed(evt);
-            }
-        });
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(20, 100, 220, 20);
 
         jTextFieldnim.setText(" ");
         jTextFieldnim.addActionListener(new java.awt.event.ActionListener() {
@@ -128,87 +198,100 @@ ResultSet rsinvoice=null;
                 jTextFieldnimActionPerformed(evt);
             }
         });
+        getContentPane().add(jTextFieldnim);
+        jTextFieldnim.setBounds(260, 100, 133, 24);
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel3.setText("Total Biaya");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(45, 173, 119, 32);
 
-        labelhasil.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        labelhasil.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         labelhasil.setText("Rp 0,-");
+        getContentPane().add(labelhasil);
+        labelhasil.setBounds(260, 170, 133, 32);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addComponent(buttonget, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(buttonclear, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldnim, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelhasil, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(354, 354, 354)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jTextFieldnim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(64, 64, 64)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(labelhasil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(120, 120, 120)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(buttonget, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(buttonclear, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20))
-        );
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rumahsakit/Logo-PBO-kecil-bgt.png"))); // NOI18N
+        jLabel5.setText("Logo");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(10, 10, 30, 30);
+
+        button2.setLabel("Clear");
+        button2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button2);
+        button2.setBounds(150, 290, 90, 50);
+
+        button1.setLabel("GET");
+        button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button1);
+        button1.setBounds(30, 290, 90, 50);
+
+        button3.setLabel("Print Invoice");
+        button3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button3);
+        button3.setBounds(280, 290, 90, 50);
+
+        button4.setLabel("Kembali");
+        button4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button4ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button4);
+        button4.setBounds(40, 440, 60, 30);
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rumahsakit/Bg-PBO-coab.jpg"))); // NOI18N
+        jLabel4.setText("Background");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(0, 0, 900, 520);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buttongetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttongetActionPerformed
+    private void jTextFieldnimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldnimActionPerformed
         // TODO add your handling code here:
-        String a = jTextFieldnim.getText();
+    }//GEN-LAST:event_jTextFieldnimActionPerformed
+
+    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+        // TODO add your handling code here:
+       String a = jTextFieldnim.getText();
 
         tampilData(a);
         TotalHarga(a);
 
-        
-    }//GEN-LAST:event_buttongetActionPerformed
+    }//GEN-LAST:event_button1ActionPerformed
 
-    private void buttonclearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonclearActionPerformed
+    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
         // TODO add your handling code here:
-        jTextFieldnim.setText("");
+                jTextFieldnim.setText("");
         labelhasil.setText("Rp 0.00,-");
         tampilData(null);;
-    }//GEN-LAST:event_buttonclearActionPerformed
+    }//GEN-LAST:event_button2ActionPerformed
 
-    private void jTextFieldnimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldnimActionPerformed
+    private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldnimActionPerformed
+        String a = jTextFieldnim.getText();
+        printpdf(a);
+        JOptionPane.showMessageDialog(null,"File PDF sudah tergenerate");
+    }//GEN-LAST:event_button3ActionPerformed
+
+    private void button4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button4ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        new menuUtama().setVisible(true);
+    }//GEN-LAST:event_button4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -246,11 +329,15 @@ ResultSet rsinvoice=null;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TableInvoice;
-    private javax.swing.JButton buttonclear;
-    private javax.swing.JButton buttonget;
+    private java.awt.Button button1;
+    private java.awt.Button button2;
+    private java.awt.Button button3;
+    private java.awt.Button button4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextFieldnim;
     private javax.swing.JLabel labelhasil;

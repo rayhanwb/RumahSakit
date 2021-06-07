@@ -55,6 +55,7 @@ ResultSet RS=null;
     //show data to form when click data on table
     //menampilkan data ke form saat data pada tabel di klik
     void tableToForm(){
+        jTextFieldIdL.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),0)+"");
         jTextFieldIdP.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),1)+"");
         jTextFieldIdD.setText(tabModel.getValueAt(TabelPasien.getSelectedRow(),2)+"");
         jComboBoxJenis.setSelectedItem(tabModel.getValueAt(TabelPasien.getSelectedRow(),3)+"");
@@ -135,8 +136,12 @@ ResultSet RS=null;
         jLabel10 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jTextFieldIdL = new javax.swing.JTextField();
+        button1 = new java.awt.Button();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Maju Jaya Medical");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         TabelPasien.setModel(new javax.swing.table.DefaultTableModel(
@@ -174,11 +179,11 @@ ResultSet RS=null;
 
         jLabel2.setForeground(new java.awt.Color(1, 1, 1));
         jLabel2.setText("ID Pasien");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, 30));
 
         jLabel3.setForeground(new java.awt.Color(1, 1, 1));
         jLabel3.setText("ID Dokter");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, 20));
 
         jTextFieldIdD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -189,34 +194,34 @@ ResultSet RS=null;
 
         jLabel5.setForeground(new java.awt.Color(1, 1, 1));
         jLabel5.setText("Keterangan");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, -1, 20));
 
         jLabel6.setForeground(new java.awt.Color(1, 1, 1));
         jLabel6.setText("Waktu");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 90, 20));
 
         jLabel7.setForeground(new java.awt.Color(1, 1, 1));
         jLabel7.setText("Harga");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 460, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 80, 20));
 
         jTextFieldWaktu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldWaktuActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextFieldWaktu, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 410, 161, -1));
+        getContentPane().add(jTextFieldWaktu, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 300, 161, -1));
 
         jLabel8.setForeground(new java.awt.Color(1, 1, 1));
         jLabel8.setText("Jenis ");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, -1, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 90, 20));
 
         jTextFieldHarga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldHargaActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextFieldHarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 450, 161, -1));
-        getContentPane().add(textAreaKet, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 310, 160, -1));
+        getContentPane().add(jTextFieldHarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 340, 161, -1));
+        getContentPane().add(textAreaKet, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 390, 160, 80));
 
         buttonNew.setLabel("New");
         buttonNew.setName(""); // NOI18N
@@ -225,7 +230,7 @@ ResultSet RS=null;
                 buttonNewActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonNew, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 510, -1, -1));
+        getContentPane().add(buttonNew, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 500, 50, -1));
 
         buttonUpdate.setLabel("Update");
         buttonUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -233,7 +238,7 @@ ResultSet RS=null;
                 buttonUpdateActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 510, -1, -1));
+        getContentPane().add(buttonUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 500, 50, -1));
 
         buttonDelete.setLabel("Delete");
         buttonDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -241,7 +246,7 @@ ResultSet RS=null;
                 buttonDeleteActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 510, -1, -1));
+        getContentPane().add(buttonDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 500, 50, -1));
 
         buttonSave.setLabel("Save");
         buttonSave.addActionListener(new java.awt.event.ActionListener() {
@@ -249,7 +254,7 @@ ResultSet RS=null;
                 buttonSaveActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 510, 57, -1));
+        getContentPane().add(buttonSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 500, 50, -1));
 
         jComboBoxJenis.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Umum", "Khusus" }));
         jComboBoxJenis.addActionListener(new java.awt.event.ActionListener() {
@@ -262,7 +267,7 @@ ResultSet RS=null;
 
         jLabel4.setForeground(new java.awt.Color(1, 1, 1));
         jLabel4.setText("ID Layanan");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, 30));
 
         jTextFieldIdL.setToolTipText("");
         jTextFieldIdL.addActionListener(new java.awt.event.ActionListener() {
@@ -271,6 +276,22 @@ ResultSet RS=null;
             }
         });
         getContentPane().add(jTextFieldIdL, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 161, -1));
+
+        button1.setLabel("Kembali");
+        button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 560, 60, -1));
+
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rumahsakit/Logo-PBO-kecil-bgt.png"))); // NOI18N
+        jLabel11.setText("Logo");
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, -1));
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rumahsakit/Bg-PBO-coab.jpg"))); // NOI18N
+        jLabel9.setText("background");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, 620));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -429,6 +450,12 @@ ResultSet RS=null;
         }
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
+    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        new menuUtama().setVisible(true);
+    }//GEN-LAST:event_button1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -466,6 +493,7 @@ ResultSet RS=null;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TabelPasien;
+    private java.awt.Button button1;
     private java.awt.Button buttonDelete;
     private java.awt.Button buttonNew;
     private java.awt.Button buttonSave;
@@ -473,6 +501,7 @@ ResultSet RS=null;
     private javax.swing.JComboBox<String> jComboBoxJenis;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -480,6 +509,7 @@ ResultSet RS=null;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextFieldHarga;
     private javax.swing.JTextField jTextFieldIdD;
