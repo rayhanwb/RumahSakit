@@ -15,7 +15,7 @@ import java.awt.*;
  */
 public class DataPasien extends javax.swing.JFrame {
 DefaultTableModel tabModel;
-ResultSet RsProduk=null;
+ResultSet RS=null;
     /**
      * Creates new form DataPasien
      */
@@ -34,17 +34,17 @@ ResultSet RsProduk=null;
             Statement stt=conn.createStatement();
             tabModel.getDataVector().removeAllElements();
             
-            RsProduk=stt.executeQuery("SELECT * from pasien ");  
-            while(RsProduk.next()){
+            RS=stt.executeQuery("SELECT * from pasien ");  
+            while(RS.next()){
                 Object[] data={
-                    RsProduk.getString("id_pasien"),
-                    RsProduk.getString("nik"),
-                    RsProduk.getString("nama"),
-                    RsProduk.getString("alamat"),
-                    RsProduk.getString("telepon"),
-                    RsProduk.getString("tglahir"),
-                    RsProduk.getString("goldar"), 
-                    RsProduk.getString("gender") 
+                    RS.getString("id_pasien"),
+                    RS.getString("nik"),
+                    RS.getString("nama"),
+                    RS.getString("alamat"),
+                    RS.getString("telepon"),
+                    RS.getString("tglahir"),
+                    RS.getString("goldar"), 
+                    RS.getString("gender") 
                 };
                tabModel.addRow(data);
             }                

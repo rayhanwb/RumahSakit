@@ -15,7 +15,7 @@ import java.awt.*;
  */
 public class Layanan extends javax.swing.JFrame {
 DefaultTableModel tabModel;
-ResultSet RsProduk=null;
+ResultSet RS=null;
     /**
      * Creates new form DataPasien
      */
@@ -34,16 +34,16 @@ ResultSet RsProduk=null;
             Statement stt=conn.createStatement();
             tabModel.getDataVector().removeAllElements();
             
-            RsProduk=stt.executeQuery("SELECT * from layanan ");  
-            while(RsProduk.next()){
+            RS=stt.executeQuery("SELECT * from layanan ");  
+            while(RS.next()){
                 Object[] data={
-                    RsProduk.getString("id_layanan"),
-                    RsProduk.getString("id_pasien"),
-                    RsProduk.getString("id_dokter"),
-                    RsProduk.getString("jenis"),
-                    RsProduk.getString("keterangan"),
-                    RsProduk.getString("waktu"),
-                    RsProduk.getString("harga")  
+                    RS.getString("id_layanan"),
+                    RS.getString("id_pasien"),
+                    RS.getString("id_dokter"),
+                    RS.getString("jenis"),
+                    RS.getString("keterangan"),
+                    RS.getString("waktu"),
+                    RS.getString("harga")  
                 };
                tabModel.addRow(data);
             }                
