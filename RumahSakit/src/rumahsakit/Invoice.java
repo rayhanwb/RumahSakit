@@ -77,7 +77,7 @@ ResultSet rsinvoice=null;
     }
             public static void printpdf(String idpelanggan){
     try{
-    String file_name="..\\InvoicePasien.pdf";
+    String file_name="..\\InvoicePasien'"+ idpelanggan +"'.pdf";
     Document document=new Document();
     PdfWriter.getInstance(document, new FileOutputStream(file_name));
     document.open();
