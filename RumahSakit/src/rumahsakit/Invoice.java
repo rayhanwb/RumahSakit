@@ -81,7 +81,8 @@ ResultSet rsinvoice=null;
     Document document=new Document();
     PdfWriter.getInstance(document, new FileOutputStream(file_name));
     document.open();
-    document.add(Image.getInstance( "src\\RumahSakit\\kop.png" ));
+    String img = "https://cdn.discordapp.com/attachments/839027400166735932/851501331922681887/kop.png";
+    document.add(Image.getInstance( img ));
     Connection connection=(Connection)koneksi.koneksiDB();
     ResultSet rs=null;
     PreparedStatement ps=null;
@@ -163,7 +164,6 @@ System.err.println(e);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Maju Jaya Medical");
         setMinimumSize(new java.awt.Dimension(915, 560));
-        setPreferredSize(new java.awt.Dimension(915, 560));
         getContentPane().setLayout(null);
 
         TableInvoice.setModel(new javax.swing.table.DefaultTableModel(
@@ -180,7 +180,7 @@ System.err.println(e);
         jScrollPane1.setViewportView(TableInvoice);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(420, 77, 453, 403);
+        jScrollPane1.setBounds(420, 77, 452, 402);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         jLabel1.setText("Invoice");
@@ -199,7 +199,7 @@ System.err.println(e);
             }
         });
         getContentPane().add(jTextFieldnim);
-        jTextFieldnim.setBounds(260, 100, 133, 24);
+        jTextFieldnim.setBounds(260, 100, 133, 20);
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel3.setText("Total Biaya");
